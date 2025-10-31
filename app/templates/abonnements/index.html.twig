@@ -1,0 +1,161 @@
+{% extends 'base.html.twig' %}
+{% block title %}Plus d’abonnements — Come Alive Fitness{% endblock %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  <style>
+    .price { font-weight: 800; line-height: 1; font-size: clamp(1.6rem, 1.1rem + 1.4vw, 2.25rem); }
+    .price .period { font-weight: 600; font-size: .9rem; color: var(--bs-secondary-color); }
+    .reduced { font-size: .95rem; color: var(--bs-secondary-color); }
+    .card-hover { transition: transform .2s ease, box-shadow .2s ease; }
+    .card-hover:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,.08); }
+  </style>
+{% endblock %}
+
+{% block body %}
+<section class="py-5">
+  <div class="container">
+    <h1 class="section-title h2 text-center mb-5">Plus d’abonnements</h1>
+
+    {# -------- 16 ans et + -------- #}
+    <h2 class="h4 mb-3">Nos abonnements à partir de 16 ans</h2>
+    <div class="row g-4 mb-5">
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 text-center card-hover">
+          <div class="card-body">
+            <div class="badge text-bg-primary mb-2">Sport Plaisir Santé</div>
+            <div class="price mb-2">39,90€ <span class="period">/mois</span></div>
+            <div class="reduced mb-3">Tarif Réduit* : 34,90€ / mois</div>
+            <ul class="list-unstyled text-start small mb-4">
+              <li><i class="bi bi-check2 text-success me-1"></i>Engagement 12 mois</li>
+              <li><i class="bi bi-check2 text-success me-1"></i>Frais de dossier : 50 €</li>
+              <li><i class="bi bi-check2 text-success me-1"></i>Accès illimité aux cours adultes</li>
+            </ul>
+            <a href="{{ path('app_contact') ?? '#contact' }}" class="btn btn-primary">Je m’abonne</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 text-center card-hover">
+          <div class="card-body">
+            <div class="badge text-bg-secondary mb-2">1 MOIS</div>
+            <div class="price mb-2">60€</div>
+            <div class="reduced mb-3">Tarif Réduit* : 55€</div>
+            <ul class="list-unstyled text-start small mb-4">
+              <li><i class="bi bi-check2 text-success me-1"></i>Accès illimité aux cours adultes</li>
+              <br><br>
+            </ul>
+            <a href="{{ path('app_contact') ?? '#contact' }}" class="btn btn-outline-primary">Je commence</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {# -------- Étudiants / Lycéens -------- #}
+    <h2 class="h4 mb-3">Abonnements lycéen, étudiant</h2>
+    <div class="row g-4 mb-5">
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 text-center card-hover">
+          <div class="card-body">
+            <div class="badge text-bg-primary mb-2">Sport Plaisir Santé — ÉTUDIANT</div>
+            <div class="price mb-2">29,90€ <span class="period">/mois</span></div>
+            <ul class="list-unstyled text-start small mb-4">
+              <li><i class="bi bi-check2 text-success me-1"></i>Engagement 12 mois</li>
+              <li><i class="bi bi-check2 text-success me-1"></i>Frais de dossier : 50 €</li>
+              <li><i class="bi bi-check2 text-success me-1"></i>Accès illimité aux cours adultes</li>
+            </ul>
+            <a href="{{ path('app_contact') ?? '#contact' }}" class="btn btn-primary">Je m’abonne</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 text-center card-hover">
+          <div class="card-body">
+            <div class="badge text-bg-info mb-2">ÉTUDIANT — WEEKEND</div>
+            <div class="price mb-2">19,90€ <span class="period">/mois</span></div>
+            <ul class="list-unstyled text-start small mb-4">
+              <li><i class="bi bi-check2 text-success me-1"></i>Engagement 12 mois</li>
+              <li><i class="bi bi-check2 text-success me-1"></i>Frais de dossier : 20 €</li>
+              <li><i class="bi bi-check2 text-success me-1"></i>Accès aux cours les samedi/dimanches</li>
+            </ul>
+            <a href="{{ path('app_contact') ?? '#contact' }}" class="btn btn-outline-primary">Je m’abonne</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 text-center card-hover">
+          <div class="card-body">
+            <div class="badge text-bg-warning mb-2">Sport Plaisir Santé — LYCÉEN</div>
+            <div class="price mb-2">19,90€ <span class="period">/mois</span></div>
+            <ul class="list-unstyled text-start small mb-4">
+              <li><i class="bi bi-check2 text-success me-1"></i>Engagement 12 mois</li>
+              <li><i class="bi bi-check2 text-success me-1"></i>Frais de dossier : 50 €</li>
+              <li><i class="bi bi-check2 text-success me-1"></i>Accès illimité aux cours adultes <small class="text-muted">(sauf Flying Pole adultes)</small></li>
+            </ul>
+            <a href="{{ path('app_contact') ?? '#contact' }}" class="btn btn-outline-primary">Je m’inscris</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {# -------- Gym Senior -------- #}
+    <h2 class="h4 mb-3">Formule GYM SENIOR</h2>
+    <div class="row g-4 mb-5">
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 text-center card-hover">
+          <div class="card-body">
+            <div class="badge text-bg-success mb-2">GYM SENIOR</div>
+            <div class="price mb-2">19,90€ <span class="period">/mois</span></div>
+            <ul class="list-unstyled text-start small mb-4">
+              <li><i class="bi bi-check2 text-success me-1"></i>Engagement 12 mois</li>
+              <li><i class="bi bi-check2 text-success me-1"></i>Frais de dossier : 20 €</li>
+              <li><i class="bi bi-check2 text-success me-1"></i>Accès aux cours GYM SENIOR seulement</li>
+            </ul>
+            <a href="{{ path('app_contact') ?? '#contact' }}" class="btn btn-outline-primary">Je réserve</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {# -------- À la carte -------- #}
+    <h2 class="h4 mb-3">À la carte — à réserver en club</h2>
+    <div class="row g-4">
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 text-center card-hover">
+          <div class="card-body">
+            <div class="badge text-bg-dark mb-2">1 SÉANCE</div>
+            <div class="price mb-2">20€</div>
+            <div class="reduced mb-3">Tarif Réduit* : 15€</div>
+            <a href="{{ path('app_contact') ?? '#contact' }}" class="btn btn-outline-primary">Je réserve</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 text-center card-hover">
+          <div class="card-body">
+            <div class="badge text-bg-dark mb-2">CARNET 10 SÉANCES</div>
+            <div class="price mb-2">120€</div>
+            <div class="reduced mb-3">Tarif Réduit* : 90€</div>
+            <a href="{{ path('app_contact') ?? '#contact' }}" class="btn btn-outline-primary">Je réserve</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {# -------- Notes -------- #}
+    <div class="mt-5 small text-muted">
+      <p class="mb-1">* Tarif Réduit sur présentation d’un justificatif : Sans emploi, plus de 65 ans, Lycéens / Étudiants.</p>
+      <p class="mb-0">Pour les abonnements avec engagement un an, tarif réduit également pour : Duo (inscription simultanée).</p>
+    </div>
+
+    <div class="text-center mt-5">
+      <a href="{{ path('app_home') }}" class="btn btn-outline-secondary">← Retour à l’accueil</a>
+    </div>
+  </div>
+</section>
+{% endblock %}
+

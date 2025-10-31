@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  database: # Conteneur pour la base de données
+    container_name: database
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: secret # Mot de passe root
+      MYSQL_DATABASE: come_alive # Nom de la base de données
+      MYSQL_USER: symfony # Utilisateur de la base de données
+      MYSQL_PASSWORD: symfony # Mot de passe de la base de données
+    ports:
+      - '4306:3306' # Ports utilisés (Port externe:Port interne au conteneur)
+    volumes:
+      - ./mysql:/var/lib/mysql # Dossiers utilisés (Dossier local:Dossier interne au conteneur)
+  php: # Conteneur pour le PHP
+    container_name: php
+    build:
+      context: ./php # Dossier contenant la configuration du conteneur (Dockerfile)
+    ports:
+      - 8080:80 # Ports utilisés (Port externe:Port interne au conteneur)
+    volumes:
+      - ./apache/default.conf:/etc/apache2/sites-enabled/000-default.conf # Dossiers utilisés (Dossier local:Dossier interne au conteneur)
+      - ./app:/var/www # Dossiers utilisés (Dossier local:Dossier interne au conteneur)
+    depends_on:
+      - database # Dépendance (php dépend du conteneur database)
+  phpma: # Conteneur pour PHPMyAdmin
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    environment:
+      PMA_ARBITRARY: 1 # Permet d'avoir le choix du serveur lors de la connexion
+      PMA_HOST: database # Nom du service MySQL
+      PMA_USER: root # Utilisateur avec lequel se connecter
+      PMA_PASSWORD: secret # Mot de passe de l'utilisateur
+      UPLOAD_LIMIT: 20M # Limite d'envoi de fichiers
+    ports:
+      - 8899:80 # Ports utilisés (Port externe:Port interne au conteneur)

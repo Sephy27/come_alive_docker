@@ -1,0 +1,252 @@
+{# templates/home/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Come Alive Fitness — Salle de sport coachée{% endblock %}
+
+
+{% block stylesheets %}
+  {{ parent() }}
+  
+{% endblock %}
+
+{% block body %}
+
+{# CONCEPT / DIFFERENCIATION — VERSION PLUS PREMIUM #}
+<section class="py-5 soft-gradient overflow-hidden">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6 order-2 order-lg-1">
+        <span class="badge rounded-pill text-bg-dark mb-3">Salle coachée · Gaillon</span>
+        <h2 class="section-title display-6 mb-3">Pourquoi nous choisir</h2>
+        <p class="text-muted mb-4">Ici, pas de machines en roue libre : <strong>chaque séance est encadrée</strong> par un coach diplômé qui adapte 
+          l’intensité et la technique à votre niveau.</p>
+
+        <div class="vstack gap-3">
+          <div class="d-flex align-items-start gap-3">
+            <div class="feature-badge"><i class="bi bi-person-check"></i></div>
+            <div>
+              <h3 class="h6 mb-1">Encadrement permanent</h3>
+              <p class="text-muted mb-0">Un coach présent du début à la fin pour corriger vos postures et vous motiver.</p>
+            </div>
+          </div>
+          <div class="d-flex align-items-start gap-3">
+            <div class="feature-badge"><i class="bi bi-bullseye"></i></div>
+            <div>
+              <h3 class="h6 mb-1">Programme personnalisé</h3>
+              <p class="text-muted mb-0">Objectifs perte de poids, remise en forme ou performance : on construit le plan pour vous.</p>
+            </div>
+          </div>
+          <div class="d-flex align-items-start gap-3">
+            <div class="feature-badge"><i class="bi bi-emoji-smile"></i></div>
+            <div>
+              <h3 class="h6 mb-1">Ambiance conviviale</h3>
+              <p class="text-muted mb-0">Groupes à taille humaine, matériel pro et énergie positive.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row text-center mt-4 g-3">
+          <div class="col-4">
+            <div class="kpi">
+              <div class="kpi-number">+300</div>
+                <div class="kpi-label">adhérents guidés</div>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="kpi">
+              <div class="kpi-number">30</div>
+              <div class="kpi-label">cours / semaine</div>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="kpi">
+              <div class="kpi-number">100%</div>
+                <div class="kpi-label">coachés</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex flex-wrap gap-2 mt-4">
+          <span class="badge rounded-pill text-bg-primary">Suivi progression</span>
+          <span class="badge rounded-pill text-bg-secondary">Conseils nutrition</span>
+          <span class="badge rounded-pill text-bg-success">Prévention blessure</span>
+        </div>
+
+        <div class="mt-4 d-flex gap-2">
+          <a href="{{ path('seance_essai') }}" class="btn btn-primary">Séance d’essai</a>
+          <a href="#activites" class="btn btn-outline-dark">Voir les activités</a>
+        </div>
+      </div>
+
+      <div class="col-lg-6 order-1 order-lg-2">
+        <!-- Composition visuelle: photo principale + vignettes -->
+        <div class="position-relative img-stack mx-auto" style="max-width:520px;">
+          <img src="/images/logocomealivenoir.png" class="img-fluid rounded-4 shadow-lg main" alt="Coaching individuel en salle">
+          <img src="/images/bandeau11.png" class="img-fluid rounded-4 shadow vignette v1" alt="Cours collectifs">
+          <img src="/images/coeur1.png" class="img-fluid rounded-4 shadow vignette v2" alt="Travail technique">
+          <div class="floating-card card shadow-sm">
+            <div class="card-body p-3 d-flex align-items-center gap-3">
+              <i class="bi bi-heart-pulse fs-4 text-danger"></i>
+              <div>
+                <div class="fw-bold small">Objectif Santé</div>
+                <div class="text-muted small">Remise en forme </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  {# ACTIVITÉS #}
+  <section id="activites" class="py-5 bg-body-tertiary">
+    <div class="container">
+      <h2 class="section-title h1 text-center mb-5">Nos activités</h2>
+      <div class="row g-4">
+        {% set activites = [
+          { titre: 'Step', desc: 'Le classique du Fitness, une chorégraphie pour travailler le cardio et la mémoire dans la bonne humeur.
+            Débutant, Intermédiaire ou Dance, choisissez votre niveau.', img: '/images/step.jpg' },
+          { titre: 'Cardioland', desc: 'Un cours pour brûler un max de calories, gagner en endurance et en résistance, travailler votre coeur. 
+            Une énérgie collective et du fun pour tous.', img: '/images/cardioland01.jpg' },
+          { titre: 'HIIT', desc: 'Un fractionné à haute intensité, 30 secondes de travail intense, 30 secondes de récupération. 
+            Une méthode ultra efficace !', img: '/images/hiit.jpg' },
+          { titre: 'Functional Training', desc: 'Des compétences physiques à acquérir ou à améliorer.
+            Perte de gras, plus de souffle, un corps plus fort, plus tonique et plus dessiné.', img: '/images/functional.jpg' },
+          { titre: 'Hybrid Training', desc: 'L’alternance entre course à pied et ateliers fonctionnels. Venez vous surpasser.', img: '/images/hybrid.jpg' },
+          { titre: 'Souplesse Yoga Pilates', desc: 'Renforcement des muscles profonds.
+            L’un des meilleurs cours pour détendre les muscles, gagner en mobilité et réduire les douleurs musculaires et articulaires.
+            Un meilleur équilibre et une meilleure mobilité pour une amélioration de la santé et du bien être.', img: '/images/souplesse.jpg' },
+          { titre: 'Gym Sénior', desc: 'Séances adaptées en vue d’améliorer l’équilibre, la mobilité, la force et les autres compétences physiques.', img: '/images/gym.jpg' },
+          { titre: 'Marche Nordique / Running', desc: 'Marcher ou courir en groupe pour une amélioration de votre système cardiovasculaire.
+            Des exercices variés, des challenges pour un corps plus rapide et plus puissant !', img: '/images/running.jpg' },
+          { titre: 'Stade', desc: 'Venez travailler votre foulée : technique, agilité, vitesse. Des exercices variés !', img: '/images/stade.jpg' },
+          { titre: 'Move n’ Dance', desc: 'Fun, cardio et stylé, des chorégraphies simples pour s’amuser.', img: '/images/move.jpg' },
+          { titre: 'Fit Dance', desc: 'On construit la choré pendant le cours.', img: '/images/fitdance.jpg' },
+          { titre: 'Heels', desc: 'Cours de danse sur talons', img: '/images/heels.jpg' },
+          { titre: 'Jump', desc: 'Du cardio, du fun et du rythme ! 
+            Une séance dynamique sur mini-trampoline pour brûler des calories, tonifier tout le corps 
+            et renforcer le cœur — sans impact sur les articulations.', img: '/images/cardioland.jpg' },
+          { titre: 'Sangles', desc: 'Un entraînement complet utilisant les sangles TRX, où chaque mouvement engage votre sangle abdominale. 
+            Améliore la force, la stabilité et la posture grâce au poids du corps. Accessible à tous niveaux !', img: '/images/sangles.jpg' },
+          { titre: 'Flying pole dance', desc: 'Une barre de pole dance suspendue au plafond, venez découvrir cette activité unique et révélez-vous.', img: '/images/flying.jpg' },
+        ] %}
+
+        {% for a in activites|slice(0, 6) %}
+          <div class="col-12 col-sm-6 col-lg-4">
+            <div class="card h-100 card-hover">
+              <div class="ratio ratio-16x9 bg-light" style="background:url('{{ a.img }}') center/cover no-repeat;"></div>
+              <div class="card-body">
+                <h3 class="h5">{{ a.titre }}</h3>
+                <p class="text-muted mb-0">{{ a.desc }}</p>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="text-center mt-4">
+        <a href="{{ path('app_activites') }}" class="btn btn-outline-primary">
+          Plus d’activités
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {# PLANNING (aperçu) #}
+  <section id="planning" class="py-5">
+    <div class="container">
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-6">
+          <h2 class="section-title h1 mb-4">Planning de la semaine</h2>
+          <p class="text-muted mb-4">Découvrez des créneaux variés du lundi au samedi. Réservez votre séance d’essai en un clic.</p>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item d-flex justify-content-between"><span>Lundi</span><span>10:00 • 12:45 | 18:00 • 21:45</span></li>
+            <li class="list-group-item d-flex justify-content-between"><span>Mardi</span><span>17:30 • 21:15</span></li>
+            <li class="list-group-item d-flex justify-content-between"><span>Mercredi</span><span>10:00 • 13:00 | 18:00 • 21:00</span></li>
+            <li class="list-group-item d-flex justify-content-between"><span>Jeudi</span><span>18:00 • 21:15</span></li>
+            <li class="list-group-item d-flex justify-content-between"><span>Vendredi</span><span>11:45 • 13:15 | 18:15 • 20:30 </span></li>
+            <li class="list-group-item d-flex justify-content-between"><span>Samedi</span><span>10:00 • 13:00</span></li>
+          </ul>
+          <a href="{{ path('seance_essai') }}" class="btn btn-primary mt-4">Réserver une séance d’essai</a>
+        </div>
+        <div class="col-lg-6 d-none d-lg-block">
+          <a href="https://app.peppy.cool/boxes/come-alive-fitness/cltek4trw3813961hql57rau7ve/schedule/?skipPlatformFees=true"><img src="/images/peppy.png" class="img-fluid rounded-4" alt="logo application Peppy"></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {# TARIFS #}
+  <section id="tarifs" class="py-5 bg-body-tertiary">
+    <div class="container">
+      <h2 class="section-title h1 text-center mb-5">Nos abonnements</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card h-100 text-center card-hover">
+            <div class="card-body">
+              <h3 class="h5">1 Mois</h3>
+              
+              <p class="display-6 fw-bold mb-3">60€<small class="text-muted fs-6">/mois</small></p>
+              <ul class="list-unstyled text-start small">
+                <li><i class="bi bi-check2 me-2 text-success"></i>Tarif Réduit * : 55€</li>
+                <li><i class="bi bi-check2 me-2 text-success"></i>Accès illimité aux cours</li>
+              </ul>
+              <br><br>
+              <a href="#contact" class="btn btn-outline-primary">Je commence</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 text-center border-primary card-hover">
+            <div class="card-body">
+              <div class="badge bg-primary mb-2">Populaire</div>
+              <h3 class="h5">Sport Plaisir Santé</h3>
+              
+              <p class="display-6 fw-bold mb-3">39.90€<small class="text-muted fs-6">/mois</small></p>
+              <ul class="list-unstyled text-start small">
+                <li><i class="bi bi-check2 me-2 text-success"></i>Engagement 12 mois</li>
+                <li><i class="bi bi-check2 me-2 text-success"></i>Frais de dossier : 50 €</li>
+                <li><i class="bi bi-x-lg me-2 text-success"></i>Accès illimité aux cours</li>
+              </ul>
+              <a href="#contact" class="btn btn-primary">Je m’abonne</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 text-center card-hover">
+            <div class="card-body">
+              <h3 class="h5">Gym Senior</h3>
+              <p class="text-muted"></p>
+              <p class="display-6 fw-bold mb-3">19.90€<small class="text-muted fs-6">/mois</small></p>
+              <ul class="list-unstyled text-start small">
+                <li><i class="bi bi-check2 me-2 text-success"></i>Engagement 12 mois</li>
+                <li><i class="bi bi-check2 me-2 text-success"></i>Frais de dossier : 20 €</li>
+                <li><i class="bi bi-check2 me-2 text-success"></i>Accès aux cours GYM SENIOR seulement</li>
+              </ul>
+              <br>
+              <a href="#contact" class="btn btn-outline-primary">Je réserve</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-center mt-4">
+        <a href="{{ path('app_abonnements') }}" class="btn btn-outline-primary">Plus d'abonnements</a>
+      </div>
+    </div>
+  </section>
+
+  {# AVIS CLIENTS #}
+  <section class="py-5">
+    
+      <h2 class="section-title h1 text-center mb-5">Ils nous recommandent</h2>
+      
+       <!-- Elfsight Google Reviews | Untitled Google Reviews -->
+      <script src="https://elfsightcdn.com/platform.js" async></script>
+      <div class="elfsight-app-5a1f418e-a40a-4067-bdde-e1a0a087d681" data-elfsight-app-lazy></div>
+
+  </section>
+  
+
+{% endblock %}
+

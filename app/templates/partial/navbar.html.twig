@@ -1,0 +1,42 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{{ path('app_home') }}">
+      <img src="/images/logo1.png" alt="logo Come Alive Fitness" width="100" height="100">
+    </a>
+    <button class="navbar-toggler me-5" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">BSM-L'Aiguiz'Eure</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body ">
+        <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{{ path('app_home') }}">ACCUEIL</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('app_abonnements') }}">ABONNEMENTS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('seance_essai') }}">SÉANCE D'ESSAI</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('app_activites') }}">ACTIVITÉS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://app.peppy.cool/boxes/come-alive-fitness/cltek4trw3813961hql57rau7ve/schedule/?skipPlatformFees=true">PLANNING</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">CONTACT</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">OÙ NOUS TROUVER</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+<div class="hero-scene d-flex align-items-center justify-content-center text-center"></div>

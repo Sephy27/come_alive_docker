@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="fr">
+  <body style="margin:0;padding:0;background:#f5f7fb;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;">
+    
+    <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="background:#f5f7fb;">
+      <tr>
+        <td align="center" style="padding:24px;">
+
+          <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.05);">
+
+            <!-- Header avec logo -->
+            <tr>
+              <td align="center" style="background:#000;padding:0;">
+                <img src="{{ absolute_url(asset('images/bandeau4.png')) }}" alt="Come Alive Fitness" style="width:100%;max-width:600px;display:block;">
+              </td>
+            </tr>
+
+            <!-- Title section -->
+            <tr>
+              <td style="background:#0d6efd;color:#fff;padding:14px 24px;font-size:18px;font-weight:700;">
+                Confirmation de votre séance d’essai
+              </td>
+            </tr>
+
+            <!-- Body -->
+            <tr>
+              <td style="padding:24px;">
+                <p style="margin:0 0 12px 0;color:#1f2937;font-size:16px;">
+                  Bonjour {{ t.firstName }}, 👋
+                </p>
+
+                <p style="margin:0 0 18px 0;color:#1f2937;font-size:15px;line-height:1.5;">
+                  Votre demande de <strong>séance d’essai</strong> a bien été prise en compte.
+                  Nous allons revenir vers vous rapidement avec la date exacte.
+                </p>
+
+                <h3 style="font-size:15px;color:#111;font-weight:600;margin-bottom:8px;">Votre demande :</h3>
+                <table width="100%" style="border:1px solid #e5e7eb;border-radius:6px;margin-bottom:20px;">
+                  <tr><td style="padding:8px 10px;background:#fafafa">Nom :</td><td style="padding:8px 10px">{{ t.lastName }}</td></tr>
+                  <tr><td style="padding:8px 10px;background:#fafafa">Prénom :</td><td style="padding:8px 10px">{{ t.firstName }}</td></tr>
+                  <tr><td style="padding:8px 10px;background:#fafafa">Téléphone :</td><td style="padding:8px 10px"><a href="tel:{{ t.phone }}" style="color:#0d6efd;text-decoration:none">{{ t.phone }}</a></td></tr>
+                  <tr><td style="padding:8px 10px;background:#fafafa">Objectif :</td><td style="padding:8px 10px">{{ t.goal ?? '—' }}</td></tr>
+                  <tr><td style="padding:8px 10px;background:#fafafa">Cours souhaité :</td><td style="padding:8px 10px">{{ t.class ?? '—' }}</td></tr>
+                </table>
+
+                <!-- Bouton Ajouter au calendrier -->
+                <table align="center">
+                  <tr>
+                    <td style="text-align:center;padding:12px 0;">
+                      <a href="{{ absolute_url(asset('calendar/trial.ics')) }}" 
+                         style="background:#0d6efd;color:#fff;text-decoration:none;padding:12px 18px;border-radius:8px;font-size:15px;font-weight:600;display:inline-block;">
+                        📅 Ajouter au calendrier
+                      </a>
+                    </td>
+                  </tr>
+                </table>
+
+                <p style="margin-top:20px;font-size:13px;color:#6b7280;">
+                  📍 Pensez à arriver 20 minutes en avance pour la visite du club.
+                </p>
+              </td>
+            </tr>
+
+            <!-- Footer -->
+            <tr>
+              <td style="background:#0b1220;color:#cbd5e1;padding:16px;font-size:12px;text-align:center;">
+                Come Alive Fitness<br>
+                5 Rue des Arrières Fossés, Gaillon (27600)<br>
+                📞 07 63 88 60 92 · ✉️ contact@comealivefitness.fr
+              </td>
+            </tr>
+
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
+

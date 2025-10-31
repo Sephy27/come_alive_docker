@@ -1,0 +1,27 @@
+{
+  "name": "come_alive_symfony",
+  "version": "1.0.0",
+  "description": "[![Netlify Status](https://api.netlify.com/api/v1/badges/54a1eaaf-946a-44e3-98e0-3f23efbdbbd5/deploy-status)](https://app.netlify.com/projects/cafitness/deploys)",
+  "homepage": "https://github.com/Sephy27/come_alive_fitness#readme",
+  "bugs": {
+    "url": "https://github.com/Sephy27/come_alive_fitness/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sephy27/come_alive_fitness.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "bootstrap-icons": "^1.13.1",
+    "express": "^5.1.0"
+  }
+}

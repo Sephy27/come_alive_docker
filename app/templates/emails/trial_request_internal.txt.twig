@@ -1,0 +1,16 @@
+Come Alive Fitness — Nouvelle demande de séance d’essai
+=======================================================
+
+Nom            : {{ t.lastName }}
+Prénom         : {{ t.firstName }}
+Email          : {{ t.email }}
+Téléphone      : {{ t.phone }}
+Objectif       : {{ t.goal|default('—') }}
+Cours souhaité : {{ t.class|default('—') }}
+
+Message :
+{{ t.message|default('—') }}
+
+Reçu le {{ t.createdAt|date('d/m/Y H:i') }}.
+Contact club : 07 63 88 60 92 — contact@comealivefitness.fr
+Adresse : Place Salvador Allende, 5 Rue des Arrières Fossés, 27600 Gaillon

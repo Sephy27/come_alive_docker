@@ -1,0 +1,193 @@
+{# templates/seance_essai/index.html.twig #}
+{% extends 'base.html.twig' %}
+{% block title %}Séance d’essai — Come Alive Fitness{% endblock %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  
+{% endblock %}
+
+{% block body %}
+
+  <!-- HERO -->
+  <header class="hero-try">
+    <div class="container">
+      <h1>Votre séance d’essai, offerte sur rendez-vous</h1>
+      <p>Découvrez la salle, l’ambiance et nos coachs : testez, ressentez, validez.</p>
+      <div class="mt-4 d-flex justify-content-center gap-2">
+        <a href="#reserver" class="btn btn-primary btn-lg"><i class="bi bi-calendar2-check me-2"></i>Réserver ma séance</a>
+        <a href="#comment" class="btn btn-outline-light btn-lg">Comment ça se passe ?</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- INTRO -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-6">
+          <h2 class="h1 mb-3">Envie d’essayer avant de vous lancer ?</h2>
+          <p class="text-muted">
+            Come Alive Fitness vous offre une **séance d’essai sur rendez-vous** pour découvrir le centre, l’ambiance, les coachs et professeurs.
+          </p>
+          <div class="d-flex flex-wrap gap-2 mt-3">
+            <span class="badge text-bg-primary">Encadrement coaché</span>
+            <span class="badge text-bg-success">Ambiance conviviale</span>
+            <span class="badge text-bg-dark">Équipement pro</span>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="card card-hover">
+            <div class="card-body d-flex align-items-center gap-3">
+              <i class="bi bi-gift fs-2 text-primary"></i>
+              <div>
+                <div class="fw-bold">Séance d’essai offerte</div>
+                <div class="text-muted small">Sur rendez-vous · dans la limite des places disponibles</div>
+              </div>
+            </div>
+            <div class="card-footer bg-transparent text-end">
+              <a href="#reserver" class="btn btn-outline-primary btn-sm">Je réserve maintenant</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMENT ÇA SE PASSE -->
+  <section id="comment" class="py-5 bg-body-tertiary">
+    <div class="container">
+      <h2 class="h1 text-center mb-5">Comment se présente une séance d’essai ?</h2>
+
+      <div class="row g-5">
+        <div class="col-lg-6">
+          <div class="timeline vstack gap-4">
+            <!-- Step 1 -->
+            <div class="timeline-item">
+              <div class="timeline-bullet"></div>
+              <h3 class="h5 d-flex align-items-center gap-2 mb-1"><i class="bi bi-clock-history text-primary"></i> 20 minutes avant</h3>
+              <p class="text-muted mb-0">Arrivez un peu en avance pour **remplir le formulaire d’accueil**, visiter les lieux et vous changer.</p>
+            </div>
+            <!-- Step 2 -->
+            <div class="timeline-item">
+              <div class="timeline-bullet"></div>
+              <h3 class="h5 d-flex align-items-center gap-2 mb-1"><i class="bi bi-activity text-danger"></i> Pendant la séance</h3>
+              <p class="text-muted mb-0">Participez au cours de votre choix **avec un coach** qui adaptera l’intensité selon votre niveau.</p>
+            </div>
+            <!-- Step 3 -->
+            <div class="timeline-item">
+              <div class="timeline-bullet"></div>
+              <h3 class="h5 d-flex align-items-center gap-2 mb-1"><i class="bi bi-chat-dots text-success"></i> Débrief</h3>
+              <p class="text-muted mb-0">Repassez à l’accueil pour un **retour d’expérience** et obtenir des recommandations personnalisées.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Checklist -->
+        <div class="col-lg-6">
+          <div class="card h-100 card-hover">
+            <div class="card-body">
+              <h3 class="h5 mb-3">De quoi avez-vous besoin ?</h3>
+              <div class="vstack gap-2">
+                <div class="check-item"><i class="bi bi-check-circle-fill"></i><span>Une **bouteille d’eau**</span></div>
+                <div class="check-item"><i class="bi bi-check-circle-fill"></i><span>Une **tenue adaptée** à la pratique sportive</span></div>
+                <div class="check-item"><i class="bi bi-check-circle-fill"></i><span>Une **paire de chaussures de sport**</span></div>
+                <div class="check-item"><i class="bi bi-check-circle-fill"></i><span>Une **serviette**</span></div>
+                <div class="check-item"><i class="bi bi-check-circle-fill"></i><span>Et surtout, **votre curiosité** !</span></div>
+              </div>
+            </div>
+            <div class="card-footer bg-transparent">
+              <small class="text-muted">Besoin d’un conseil matériel ? Écrivez-nous, on vous guide.</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-5">
+        <a href="#reserver" class="btn btn-primary btn-lg"><i class="bi bi-calendar-event me-2"></i>Réserver ma séance d’essai</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMULAIRE -->
+  <section id="reserver" class="py-5">
+    <div class="container">
+      <h2 class="h1 text-center mb-2">Réservez votre séance</h2>
+      <p class="text-center text-muted mb-5">Choisissez un créneau, dites-nous votre objectif, on s’occupe du reste.</p>
+
+      {{ form_start(form, { attr: { id: 'reserver', class: 'row g-3 g-lg-4' } }) }}
+        <div class="col-md-6">{{ form_row(form.firstName) }}</div>
+        <div class="col-md-6">{{ form_row(form.lastName) }}</div>
+        <div class="col-md-6">{{ form_row(form.email) }}</div>
+        <div class="col-md-6">{{ form_row(form.phone) }}</div>
+        <div class="col-md-6">{{ form_row(form.goal) }}</div>
+        <div class="col-md-6">{{ form_row(form.class) }}</div>
+        <div class="col-12">{{ form_row(form.message) }}</div>
+        <div class="col-12 d-flex gap-2 align-items-center">
+          {{ form_widget(form.send) }}
+          <small class="text-muted">Nous vous recontactons pour confirmer le créneau.</small>
+        </div>
+      {{ form_end(form) }}
+
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-5 bg-body-tertiary">
+    <div class="container">
+      <h2 class="h1 text-center mb-4">Questions fréquentes</h2>
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="accordion" id="faq">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="q1">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#a1" aria-expanded="true" aria-controls="a1">
+                  Puis-je venir avec un(e) ami(e) ?
+                </button>
+              </h2>
+              <div id="a1" class="accordion-collapse collapse show" aria-labelledby="q1" data-bs-parent="#faq">
+                <div class="accordion-body">
+                  Bien sûr ! Précisez-le dans le formulaire, nous essaierons de vous placer sur le même créneau.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="q2">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a2" aria-expanded="false" aria-controls="a2">
+                  J’ai un niveau débutant, est-ce adapté ?
+                </button>
+              </h2>
+              <div id="a2" class="accordion-collapse collapse" aria-labelledby="q2" data-bs-parent="#faq">
+                <div class="accordion-body">
+                  Oui. Le coach adapte l’intensité et les exercices. Notre priorité : vous faire progresser en sécurité et avec le sourire.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="q3">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a3" aria-expanded="false" aria-controls="a3">
+                  Quels sont les horaires disponibles ?
+                </button>
+              </h2>
+              <div id="a3" class="accordion-collapse collapse" aria-labelledby="q3" data-bs-parent="#faq">
+                <div class="accordion-body">
+                  Les créneaux varient selon les cours. Indiquez vos disponibilités dans le message et nous vous proposerons des options.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="text-center mt-4">
+            <a href="#reserver" class="btn btn-outline-primary"><i class="bi bi-calendar-plus me-2"></i>Je réserve ma séance d’essai</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA sticky mobile -->
+  <div class="d-sm-none cta-sticky">
+    <a href="#reserver"><i class="bi bi-lightning-charge-fill me-1"></i> Réserver ma séance d’essai</a>
+  </div>
+
+{% endblock %}
+

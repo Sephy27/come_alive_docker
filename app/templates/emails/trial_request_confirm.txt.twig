@@ -1,0 +1,22 @@
+Come Alive Fitness — Confirmation de votre demande
+==================================================
+
+Bonjour {{ t.firstName }},
+
+Merci pour votre demande de séance d’essai !
+Nous revenons vers vous rapidement pour confirmer le créneau.
+
+Récapitulatif :
+- Nom : {{ t.lastName }}
+- Prénom : {{ t.firstName }}
+- Téléphone : {{ t.phone }}
+- Objectif : {{ t.goal|default('—') }}
+- Cours souhaité : {{ t.class|default('—') }}
+
+Pour bien préparer votre venue :
+- Arrivez 20 minutes en avance (accueil & visite)
+- Apportez : bouteille d’eau, serviette, tenue & chaussures de sport
+- Le coach adaptera la séance à votre niveau
+
+Questions ? Répondez à ce mail ou appelez-nous : 07 63 88 60 92
+Demande envoyée le {{ t.createdAt|date('d/m/Y H:i') }}.

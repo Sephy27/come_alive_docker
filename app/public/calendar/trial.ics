@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Come Alive Fitness//Seance d'essai//FR
+BEGIN:VEVENT
+UID:trial-{{ "now"|date("U") }}@comealivefitness.fr
+DTSTAMP:{{ "now"|date("Ymd") }}T090000Z
+DTSTART:{{ "now"|date_modify("+2 days")|date("Ymd") }}T090000Z
+DTEND:{{ "now"|date_modify("+2 days")|date("Ymd") }}T100000Z
+SUMMARY:Séance d’essai - Come Alive Fitness
+DESCRIPTION:Votre séance d'essai au club Come Alive Fitness. Arrivez 20 min avant.
+LOCATION:5 Rue des Arrières Fossés, Gaillon
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Toutes nos activités — Come Alive Fitness{% endblock %}
+
+{% block body %}
+<section class="py-5">
+  <div class="container">
+    <h1 class="section-title h2 text-center mb-4">Toutes nos activités</h1>
+
+    {% set activites = [
+          { titre: 'Step', desc: 'Le classique du Fitness, une chorégraphie pour travailler le cardio et la mémoire dans la bonne humeur.
+            Débutant, Intermédiaire ou Dance, choisissez votre niveau.', img: '/images/step.jpg' },
+          { titre: 'Cardioland', desc: 'Un cours pour brûler un max de calories, gagner en endurance et en résistance, travailler votre coeur. 
+            Une énérgie collective et du fun pour tous.', img: '/images/cardioland01.jpg' },
+          { titre: 'HIIT', desc: 'Un fractionné à haute intensité, 30 secondes de travail intense, 30 secondes de récupération. 
+            Une méthode ultra efficace !', img: '/images/hiit.jpg' },
+          { titre: 'Functional Training', desc: 'Des compétences physiques à acquérir ou à améliorer.
+            Perte de gras, plus de souffle, un corps plus fort, plus tonique et plus dessiné.', img: '/images/functional.jpg' },
+          { titre: 'Hybrid Training', desc: 'L’alternance entre course à pied et ateliers fonctionnels. Venez vous surpasser.', img: '/images/hybrid.jpg' },
+          { titre: 'Souplesse Yoga Pilates', desc: 'Renforcement des muscles profonds.
+            L’un des meilleurs cours pour détendre les muscles, gagner en mobilité et réduire les douleurs musculaires et articulaires.
+            Un meilleur équilibre et une meilleure mobilité pour une amélioration de la santé et du bien être.', img: '/images/souplesse.jpg' },
+          { titre: 'Gym Sénior', desc: 'Séances adaptées en vue d’améliorer l’équilibre, la mobilité, la force et les autres compétences physiques.', img: '/images/gym.jpg' },
+          { titre: 'Marche Nordique / Running', desc: 'Marcher ou courir en groupe pour une amélioration de votre système cardiovasculaire.
+            Des exercices variés, des challenges pour un corps plus rapide et plus puissant !', img: '/images/running.jpg' },
+          { titre: 'Stade', desc: 'Venez travailler votre foulée : technique, agilité, vitesse. Des exercices variés !', img: '/images/stade.jpg' },
+          { titre: 'Move n’ Dance', desc: 'Fun, cardio et stylé, des chorégraphies simples pour s’amuser.', img: '/images/move.jpg' },
+          { titre: 'Fit Dance', desc: 'On construit la choré pendant le cours.', img: '/images/fitdance.jpg' },
+          { titre: 'Heels', desc: 'Cours de danse sur talons', img: '/images/heels.jpg' },
+          { titre: 'Jump', desc: 'Du cardio, du fun et du rythme ! 
+            Une séance dynamique sur mini-trampoline pour brûler des calories, tonifier tout le corps 
+            et renforcer le cœur — sans impact sur les articulations.', img: '/images/cardioland.jpg' },
+          { titre: 'Sangles', desc: 'Un entraînement complet utilisant les sangles TRX, où chaque mouvement engage votre sangle abdominale. 
+            Améliore la force, la stabilité et la posture grâce au poids du corps. Accessible à tous niveaux !', img: '/images/sangles.jpg' },
+          { titre: 'Flying pole dance', desc: 'Une barre de pole dance suspendue au plafond, venez découvrir cette activité unique et révélez-vous.', img: '/images/flying.jpg' },
+        ] %}
+
+        <div class="row g-4">
+      {% for a in activites %}
+        <div class="col-12 col-sm-6 col-lg-4">
+          <div class="card h-100 card-hover">
+            <div class="ratio ratio-16x9 bg-light" style="background:url('{{ a.img }}') center/cover no-repeat;"></div>
+            <div class="card-body">
+              <h3 class="h5">{{ a.titre }}</h3>
+              <p class="text-muted mb-0 clamp-2">{{ a.desc }}</p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="text-center mt-4">
+      <a href="{{ path('app_home') }}" class="btn btn-outline-secondary">← Retour à l’accueil</a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
