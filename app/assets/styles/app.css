@@ -298,4 +298,46 @@ html, body {
 
 
 
+/* Back-to-top suit le thème */
+.back-to-top {
+  background: var(--bs-body-color);
+  color: var(--bs-body-bg);
+}
+
+/* Hover doux uniformisé */
+.card-hover:hover { box-shadow: 0 10px 30px rgba(0,0,0,.08); }
+
+/* Gradient qui s’adapte (si tu utilises .soft-gradient) */
+.soft-gradient {
+  background:
+    radial-gradient(1000px 400px at -5% -5%, color-mix(in oklab, var(--bs-primary) 15%, transparent), transparent 60%),
+    radial-gradient(800px 300px at 105% 10%, color-mix(in oklab, var(--bs-success) 15%, transparent), transparent 60%);
+}
+
+/* Hero d’essai un peu plus sombre en dark */
+[data-bs-theme="dark"] .hero-try {
+  background-image:
+    linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)),
+    url('/images/hero-try.jpg');
+}
+
+/* Icônes réseaux dans le footer (si classe présente) */
+.footer-social a { color: var(--bs-body-color); transition: transform .15s ease; }
+.footer-social a:hover { transform: scale(1.08); }
+
+.ancv-banner{
+  max-width:100%;
+  width:600px;
+  height:auto;
+  display:block;
+  margin:0 auto;
+  transition: transform .3s ease, filter .3s ease;
+}
+.ancv-banner:hover{
+  transform: scale(1.05);
+  filter: drop-shadow(0 6px 15px rgba(0,0,0,.25));
+}
+
+
+
 
