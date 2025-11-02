@@ -8,20 +8,119 @@ html, body {
     
 }
 
-/*Bandeau navbar*/
-.hero-scene {
-    
-    width: 100%;
-    min-height: 60vh; /* hauteur responsivisée */
-    background: url("/images/bandeau4.png") center/cover no-repeat;
-    display: flex;
+/* Base */
+.hero-scene{
+  position: relative;
+  width: 100%;
+  min-height: 60vh;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
 }
 
-@media (max-width: 576px) {
-  .hero-scene {
-    min-height: 45vh;
-  }
+/* Image animée */
+.hero-scene::before{
+  content:"";
+  position:absolute; inset:0;
+  background: #000 url("/images/bandeau4.png") center/cover no-repeat;
+  transform-origin:center;
+  animation: heroCycle 10s ease-in-out infinite;
+  will-change: transform, opacity, filter;
 }
+
+/* Texte */
+.hero-slogan{
+  position:absolute;
+  z-index:2;
+  font-weight:900;
+  text-transform:uppercase;
+  font-size:clamp(2rem,6vw,6rem);
+  background: linear-gradient(90deg, #ff2d55, #ff8a00);
+    /* Compatibilité */
+  background-clip: text;           /* standard */
+  -webkit-background-clip: text;   /* Safari / Chrome */
+  color:transparent;
+  opacity:0;
+  filter:blur(10px);
+  transform:scale(.8);
+  animation: textCycle 10s ease-in-out infinite;
+}
+
+/* --- ANIMATIONS --- */
+
+@keyframes heroCycle {
+  /* 0–5s battement */
+  0%   { transform:scale(1);   filter:brightness(.95); opacity:1; }
+  6%   { transform:scale(1.05); filter:brightness(1); }
+  12%  { transform:scale(1);   filter:brightness(.96); }
+  20%  { transform:scale(1.07); filter:brightness(1); }
+  35%  { transform:scale(1); }
+  50%  { transform:scale(1.06); }
+  
+  /* fade out image */
+  55%  { opacity:1; }
+  65%  { opacity:0; transform:scale(1.05); }
+
+  /* stay hidden while text shows */
+  92%  { opacity:0; }
+
+  /* fade back image */
+  98%  { opacity:1; transform:scale(1); }
+  100% { opacity:1; }
+}
+
+/* TEXTE : visible 65%→92% (≈ 2.7s), avec vrai temps pour lecture */
+@keyframes textCycle {
+  0%, 60% { opacity:0; filter:blur(10px); transform:scale(.8); }
+
+  /* fade in texte */
+  65%  { opacity:1; filter:blur(0); transform:scale(1.03); }
+
+  /* affiché longtemps jusqu'à 92% */
+  92%  { opacity:1; filter:blur(0); transform:scale(1); }
+
+  /* fade out bref avant le retour de l'image */
+  98%  { opacity:0; filter:blur(4px); transform:scale(.95); }
+  100% { opacity:0; }
+}
+
+
+/* Mobile : hauteur un peu moindre */
+@media (max-width: 768px){
+  .hero-scene{ min-height: 45vh; }
+}
+
+/* Accessibilité : désactive les animations si l’utilisateur les réduit */
+@media (prefers-reduced-motion: reduce){
+  .hero-scene::before,
+  .hero-slogan{ animation: none; opacity: 1; filter: none; transform: none; }
+}
+
+/* typing via mask (fonctionne aussi hors monospace) */
+/* Typing synchro sur le cycle 10s */
+.hero-slogan.fx-typing{
+  white-space: nowrap; display: inline-block; overflow: hidden; max-width: 90vw;
+  -webkit-mask: linear-gradient(#000 0 0) left/0 100% no-repeat;
+          mask: linear-gradient(#000 0 0) left/0 100% no-repeat;
+  animation:
+    textCycle 10s ease-in-out infinite,
+    typeMask 10s steps(28) infinite; /* ajuste 28 ≈ nb de caractères */
+}
+
+/* tape de 65% à 75%, puis reste plein jusqu'à 92% */
+@keyframes typeMask{
+  0%,64%  { -webkit-mask-size: 0 100%;  mask-size: 0 100%; }
+  65%     { -webkit-mask-size: 0 100%;  mask-size: 0 100%; }
+  75%     { -webkit-mask-size: 100% 100%;mask-size: 100% 100%; } /* fin de l'écriture */
+  92%     { -webkit-mask-size: 100% 100%;mask-size: 100% 100%; } /* reste lisible */
+  98%,100%{ -webkit-mask-size: 0 100%;  mask-size: 0 100%; }     /* reset */
+}
+
+
+/* Petit glow respirant (optionnel) */
+.hero-slogan.fx-typing { text-shadow: 0 0 10px rgba(255,138,0,.35); }
+
+
 
 /* Effet sur les icônes réseaux */
 .footer a i {
