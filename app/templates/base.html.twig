@@ -7,8 +7,15 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="/images/favicon.png">
         {% block stylesheets %}
-        
-        
+        <script>
+            (function(){try{
+            var m = localStorage.getItem('theme') || 'auto';
+            var fin = (m==='auto') ? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark':'light') : m;
+            document.documentElement.setAttribute('data-bs-theme', fin);
+            document.documentElement.style.colorScheme = fin==='dark'?'dark':'light';
+            }catch(e){}})();
+        </script>
+
 
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" 
@@ -38,39 +45,98 @@
             <i class="bi bi-arrow-up"></i>
         </a>
         <script>
-            (function () {
-            const STORAGE_KEY = 'theme';           // 'light' | 'dark' | 'auto'
-            const html = document.documentElement;
-            const btn  = document.getElementById('theme-toggle');
-            const mq   = window.matchMedia('(prefers-color-scheme: dark)');
+            (() => {
+            // Évite double init si Turbo recolle l'HTML
+            if (window.__themeInitDone__) return; 
+            window.__themeInitDone__ = true;
 
-            function stored() { return localStorage.getItem(STORAGE_KEY) || 'auto'; }
+            const KEY = 'theme';                           // 'light' | 'dark' | 'auto'
+            const mq  = matchMedia('(prefers-color-scheme: dark)');
+
+            const getStored = () => localStorage.getItem(KEY) || 'auto';
+            const finalOf   = m => (m==='auto' ? (mq.matches ? 'dark':'light') : m);
 
             function apply(mode) {
-                const m = (mode === 'auto') ? (mq.matches ? 'dark' : 'light') : mode;
-                html.setAttribute('data-bs-theme', m);
-                if (!btn) return;
-                btn.setAttribute('aria-pressed', m === 'dark' ? 'true' : 'false');
-                btn.innerHTML = (m === 'dark')
-                ? '<i class="bi bi-sun"></i><span class="d-none d-sm-inline">Light</span>'
-                : '<i class="bi bi-moon"></i><span class="d-none d-sm-inline">Dark</span>';
+                const fin = finalOf(mode);
+                const html = document.documentElement;
+                html.setAttribute('data-bs-theme', fin);
+                html.style.colorScheme = fin==='dark'?'dark':'light';
+                // sync UI si présents
+                const desk = document.getElementById('theme-toggle-switch');
+                if (desk) desk.checked = (fin==='dark');
+                document.querySelectorAll('.theme-choice').forEach(b => {
+                const on = b.dataset.mode === mode;
+                b.classList.toggle('active', on);
+                b.setAttribute('aria-pressed', on ? 'true' : 'false');
+                });
+                // event pour autres scripts éventuellement
+                window.dispatchEvent(new CustomEvent('theme:changed', { detail:{mode, final:fin} }));
             }
 
-            // Init
-            apply(stored());
+            function setMode(mode) {
+                localStorage.setItem(KEY, mode);
+                apply(mode);
+            }
 
-            // OS change (en mode auto)
-            mq.addEventListener('change', () => { if (stored() === 'auto') apply('auto'); });
+            // ————— binding idempotent (on peut rappeler sans empiler) —————
+            function bind() {
+                // unbind d’abord
+                document.querySelectorAll('[data-theme-bound]').forEach(el => {
+                el.replaceWith(el.cloneNode(true)); // supprime les écouteurs
+                });
 
-            // Clic : light → dark → auto
-            btn?.addEventListener('click', () => {
-                const cur = stored();
-                const next = cur === 'light' ? 'dark' : (cur === 'dark' ? 'auto' : 'light');
-                localStorage.setItem(STORAGE_KEY, next);
-                apply(next);
-            });
+                // re-sélectionner après clone
+                const desk = document.getElementById('theme-toggle-switch');
+                if (desk) {
+                desk.setAttribute('data-theme-bound', '1');
+                desk.addEventListener('change', () => setMode(desk.checked ? 'dark' : 'light'), { passive:true });
+                }
+
+                document.querySelectorAll('.theme-choice').forEach(btn => {
+                btn.setAttribute('data-theme-bound', '1');
+                btn.addEventListener('click', () => setMode(btn.dataset.mode), { passive:true });
+                });
+
+                // appliquer l’état courant
+                apply(getStored());
+            }
+
+            // Init au chargement initial
+            const init = () => bind();
+
+            // DOMContentLoaded (premier chargement)
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', init, { once:true });
+            } else { init(); }
+
+            // OS change pour AUTO
+            mq.addEventListener('change', () => { if (getStored()==='auto') apply('auto'); });
+
+            // Multi-onglets
+            window.addEventListener('storage', (e) => { if (e.key===KEY) apply(getStored()); });
+
+            // 🔥 Turbo : rebinder à chaque navigation
+            window.addEventListener('turbo:load', bind);
+            window.addEventListener('turbo:render', bind);
             })();
         </script>
+
+        <script>
+            (() => {
+                const opts = { root: null, rootMargin: "0px 0px -10% 0px", threshold: 0.12 };
+                const io = new IntersectionObserver((entries) => {
+                    entries.forEach(e => {
+                        if (e.isIntersecting) {
+                            e.target.classList.add('is-in');
+                            io.unobserve(e.target); // joue une fois (retire cette ligne si tu veux rejouer)
+                        }
+                    });
+                }, opts);
+
+                document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => io.observe(el));
+            })();
+        </script>
+
 
     </body>
 

@@ -1,8 +1,7 @@
-@import "switch.css";
-@import "glass.css";
-@import "hero.css";
-
-
+:root{
+  --nav-h-mobile: 64px;
+  --nav-h-desktop: 86px; /* ajuste si besoin */
+}
 
 html, body {
     
@@ -11,7 +10,7 @@ html, body {
     border: 0;
     margin: 0;
     padding: 0;
-    background-color: var(--bs-body-bg);
+    background-color: transparent !important;
     
 }
 
@@ -344,27 +343,6 @@ html, body {
   filter: drop-shadow(0 6px 15px rgba(0,0,0,.25));
 }
 
-/* état initial */
-.reveal { opacity:0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
-.reveal.is-in { opacity:1; transform: translateY(0); }
 
-/* variantes */
-.reveal-up   { transform: translateY(24px); }
-.reveal-down { transform: translateY(-24px); }
-.reveal-left { transform: translateX(24px); }
-.reveal-right{ transform: translateX(-24px); }
 
-/* cascade/stagger */
-.reveal-stagger > * { opacity:0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
-.reveal-stagger.is-in > * { opacity:1; transform: translateY(0); }
-.reveal-stagger.is-in > * { transition-delay: var(--d, 0ms); }
-.reveal-stagger.is-in > *:nth-child(1){ --d: 0ms; }
-.reveal-stagger.is-in > *:nth-child(2){ --d: 80ms; }
-.reveal-stagger.is-in > *:nth-child(3){ --d: 160ms; }
-.reveal-stagger.is-in > *:nth-child(4){ --d: 240ms; }
-/* ajoute si besoin 5/6/etc. */
 
-/* respect des préférences utilisateur */
-@media (prefers-reduced-motion: reduce){
-  .reveal, .reveal-stagger > * { transition: none !important; transform: none !important; opacity: 1 !important; }
-}

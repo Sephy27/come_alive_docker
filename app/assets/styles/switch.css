@@ -1,0 +1,119 @@
+/* Container */
+.theme-switch { cursor: pointer; }
+
+/* Cache l’input */
+.theme-switch-input { display: none; }
+
+/* Piste du switch */
+.theme-switch-label{
+  width: 64px; height: 34px;
+  background: #c9c9c9;
+  border-radius: 999px;
+  padding: 4px;
+  position: relative;
+  display: inline-flex; align-items: center;
+  box-shadow: inset 0 0 8px rgba(0,0,0,.2);
+  transition: background .25s ease, box-shadow .25s ease, filter .25s ease;
+}
+
+/* Icônes soleil / lune aux extrémités */
+.theme-switch-icon{
+  position: absolute; top: 50%; transform: translateY(-50%);
+  font-size: 14px; line-height: 1;
+  opacity: .35; transition: opacity .25s ease, filter .25s ease;
+  pointer-events: none;
+}
+.theme-switch-icon.left  { left: 8px;  }
+.theme-switch-icon.right { right: 8px; }
+
+/* Bille */
+.theme-switch-ball{
+  width: 26px; height: 26px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0,0,0,.25);
+  transition: transform .3s ease;
+  position: relative; z-index: 2;
+}
+
+/* État DARK (checked) : glow néon + bille à droite + icône lune active */
+.theme-switch-input:checked + .theme-switch-label{
+  background: #ff7b00; /* orange fitness */
+  box-shadow:
+    0 0 0 2px rgba(255,123,0,.35),
+    0 0 24px rgba(255,123,0,.35),
+    inset 0 0 10px rgba(255,255,255,.25);
+  filter: saturate(1.1);
+}
+.theme-switch-input:checked + .theme-switch-label .theme-switch-ball{
+  transform: translateX(30px); /* 64 - 26 - padding*2 = 30 */
+}
+
+/* Icônes actives/inactives selon le thème */
+.theme-switch-input:not(:checked) + .theme-switch-label .theme-switch-icon.left  { opacity: .95; filter: drop-shadow(0 0 4px rgba(255,255,255,.35)); }
+.theme-switch-input:not(:checked) + .theme-switch-label .theme-switch-icon.right { opacity: .35; }
+.theme-switch-input:checked + .theme-switch-label .theme-switch-icon.left  { opacity: .35; }
+.theme-switch-input:checked + .theme-switch-label .theme-switch-icon.right { opacity: .95; filter: drop-shadow(0 0 6px rgba(0,0,0,.25)); }
+
+/* Rebond “snap” à l’aller ET au retour (CSS only) */
+@keyframes snapRight {
+  0%   { transform: translateX(0);    }
+  70%  { transform: translateX(32px); }
+  100% { transform: translateX(30px); }
+}
+@keyframes snapLeft {
+  0%   { transform: translateX(30px); }
+  70%  { transform: translateX(-2px); }
+  100% { transform: translateX(0);    }
+}
+
+/* On applique les keyframes selon l’état */
+.theme-switch-input:checked + .theme-switch-label .theme-switch-ball{
+  animation: snapRight .45s cubic-bezier(.2,1,.2,1);
+}
+.theme-switch-input:not(:checked) + .theme-switch-label .theme-switch-ball{
+  animation: snapLeft .45s cubic-bezier(.2,1,.2,1);
+}
+
+/* Un peu plus chic au focus clavier */
+.theme-switch-input:focus-visible + .theme-switch-label{
+  outline: 2px solid rgba(255,123,0,.7);
+  outline-offset: 2px;
+}
+
+/* Thème sombre global : piste neutre quand m=dark mais déco active côté lune */
+[data-bs-theme="dark"] .theme-switch-label{
+  background: #4b4b4b;
+}
+[data-bs-theme="dark"] .theme-switch-input:checked + .theme-switch-label{
+  background: #ff7b00;
+}
+
+/* Offcanvas mobile : lisible et respirant */
+@media (max-width: 991.98px){
+  .offcanvas-body .navbar-nav .nav-link{
+    padding: .75rem 0;
+    font-weight: 600;
+    font-size: 1.05rem;
+  }
+  .offcanvas-body{ gap: .5rem; }
+}
+
+/* Segmented control "Apparence" */
+.theme-segment .btn{
+  border-radius: 0;
+  padding: .6rem .75rem;
+}
+.theme-segment .btn:first-child{ border-top-left-radius: 999px; border-bottom-left-radius: 999px; }
+.theme-segment .btn:last-child { border-top-right-radius: 999px; border-bottom-right-radius: 999px; }
+
+/* État actif = plein + léger glow */
+.theme-segment .btn.active{
+  border-color: transparent;
+  background: linear-gradient(90deg,#ff7b00,#ff9f3a);
+  color: #fff;
+  box-shadow: 0 0 0 2px rgba(255,123,0,.25), 0 6px 18px rgba(255,123,0,.25);
+}
+
+/* Améliore les séparations fines entre boutons */
+.theme-segment .btn:not(:first-child){ margin-left: -1px; }

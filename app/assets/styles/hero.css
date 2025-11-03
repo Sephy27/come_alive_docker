@@ -1,0 +1,153 @@
+/* Base */
+.hero-scene{
+  position: relative;
+  border-top: 0;
+  width: 100%;
+  min-height: 60vh;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+
+/* Image animée */
+.hero-scene::before{
+  content:"";
+  position:absolute; 
+  inset: -2px;
+  background: #000 url("/images/bandeau4.png") center/cover no-repeat;
+  transform-origin:center;
+  animation: heroPulse 1.4s cubic-bezier(.35, 0, .25, 1) infinite,
+            heroCycle 10s ease-in-out infinite;
+  will-change: transform, opacity, filter;
+}
+
+/* Texte */
+.hero-slogan{
+  position:absolute;
+  z-index:2;
+  font-weight:900;
+  text-transform:uppercase;
+  font-size:clamp(2rem,6vw,6rem);
+  background: linear-gradient(90deg, #ff2d55, #ff8a00);
+    /* Compatibilité */
+  background-clip: text;           /* standard */
+  -webkit-background-clip: text;   /* Safari / Chrome */
+  color:transparent;
+  opacity:0;
+  filter:blur(10px);
+  transform:scale(.8);
+  animation: textCycle 10s ease-in-out infinite;
+}
+
+/* --- ANIMATIONS --- */
+
+
+/* Double battement doux et naturel */
+@keyframes heroPulse {
+  0%   { transform:scale(1); }
+
+  /* 1er battement léger */
+  12%  { transform:scale(1.03); }
+  24%  { transform:scale(1); }
+
+  /* 2ème battement encore plus subtil */
+  32%  { transform:scale(1.02); }
+  44%  { transform:scale(1); }
+
+  /* repos */
+  100% { transform:scale(1); }
+}
+
+
+
+/* Cycle disparition / retour (NE touche pas au scale) */
+@keyframes heroCycle {
+  /* visible */
+  0%, 55% { opacity:1; }
+
+  /* fade out */
+  65%  { opacity:0; }
+
+  /* reste cachée pendant le texte */
+  92%  { opacity:0; }
+
+  /* fade back in */
+  98%,100% { opacity:1; }
+}
+
+/* TEXTE : visible 65%→92% (≈ 2.7s), avec vrai temps pour lecture */
+@keyframes textCycle {
+  0%, 60% { opacity:0; filter:blur(10px); transform:scale(.8); }
+
+  /* fade in texte */
+  65%  { opacity:1; filter:blur(0); transform:scale(1.03); }
+
+  /* affiché longtemps jusqu'à 92% */
+  92%  { opacity:1; filter:blur(0); transform:scale(1); }
+
+  /* fade out bref avant le retour de l'image */
+  98%  { opacity:0; filter:blur(4px); transform:scale(.95); }
+  100% { opacity:0; }
+}
+
+
+
+.hero-slogan.fx-glitch{ 
+  position:relative; 
+  isolation:isolate; 
+}
+
+.hero-slogan.fx-glitch::before,
+.hero-slogan.fx-glitch::after{
+  content: attr(data-text);
+  position:absolute; 
+  inset:0;
+  color: transparent; 
+  -webkit-background-clip:text; 
+  background-clip:text;
+  mix-blend-mode: screen; 
+  opacity:0;
+}
+
+.hero-slogan.fx-glitch::before{ 
+  text-shadow: -2px 0 #00e5ff; 
+}
+
+.hero-slogan.fx-glitch::after { 
+  text-shadow:  2px 0 #ff2d55; 
+}
+
+/* Jitter court calé sur l’apparition (6.5s) */
+.hero-slogan.fx-glitch::before{ 
+  animation: glitchL .35s steps(6) 6.5s infinite 10s; 
+}
+
+.hero-slogan.fx-glitch::after { 
+  animation: glitchR .35s steps(6) 6.5s infinite 10s; 
+}
+
+@keyframes glitchL{
+  0%{ opacity:0; transform: translateX(0); }
+  10%{ opacity:1; transform: translateX(-2px); }
+  50%{ transform: translateX(-4px); }
+  100%{ opacity:0; transform: translateX(0); }
+}
+@keyframes glitchR{
+  0%{ opacity:0; transform: translateX(0); }
+  10%{ opacity:1; transform: translateX(2px); }
+  50%{ transform: translateX(4px); }
+  100%{ opacity:0; transform: translateX(0); }
+}
+
+
+/* Mobile : hauteur un peu moindre */
+@media (max-width: 768px){
+  .hero-scene{ min-height: 45vh; }
+}
+
+
+/* Accessibilité : désactive les animations si l’utilisateur les réduit */
+@media (prefers-reduced-motion: reduce){
+  .hero-scene::before,
+  .hero-slogan{ animation: none; opacity: 1; filter: none; transform: none; }
+}

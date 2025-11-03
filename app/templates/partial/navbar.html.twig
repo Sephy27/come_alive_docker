@@ -1,52 +1,93 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-body-tertiary navbar-glass fixed-top">
   <div class="container-fluid">
     <a class="navbar-brand" href="{{ path('app_home') }}">
       <img src="/images/logo1.png" alt="logo Come Alive Fitness" width="100" height="100">
     </a>
-    <button class="navbar-toggler me-5" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+    <!-- Bouton mobile (seulement < lg) -->
+    <button class="navbar-toggler me-2 d-lg-none" type="button"
+            data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">BSM-L'Aiguiz'Eure</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-      <div class="offcanvas-body ">
-        <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{{ path('app_home') }}">ACCUEIL</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ path('app_abonnements') }}">ABONNEMENTS</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ path('seance_essai') }}">SÉANCE D'ESSAI</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ path('app_activites') }}">ACTIVITÉS</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="https://app.peppy.cool/boxes/come-alive-fitness/cltek4trw3813961hql57rau7ve/schedule/?skipPlatformFees=true">PLANNING</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#contact">CONTACT</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#contact">OÙ NOUS TROUVER</a>
-          </li>
-        </ul>
+    <!-- ✅ Menu desktop (visible ≥ lg) -->
+    <div class="d-none d-lg-flex align-items-center flex-grow-1">
+      <ul class="navbar-nav mx-auto gap-3 nav-center-desktop">
+        <li class="nav-item"><a class="nav-link" href="{{ path('app_home') }}">ACCUEIL</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ path('app_abonnements') }}">ABONNEMENTS</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ path('seance_essai') }}">SÉANCE D'ESSAI</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ path('app_activites') }}">ACTIVITÉS</a></li>
+        <li class="nav-item"><a class="nav-link" href="https://app.peppy.cool/boxes/come-alive-fitness/cltek4trw3813961hql57rau7ve/schedule/?skipPlatformFees=true">PLANNING</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">CONTACT</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">OÙ NOUS TROUVER</a></li>
+      </ul>
+      <!-- Switch mode desktop (à droite) -->
+      <div class="theme-switch d-none d-lg-flex align-items-center ms-3">
+        <input type="checkbox" id="theme-toggle-switch" class="theme-switch-input" aria-label="Basculer le thème">
+        <label for="theme-toggle-switch" class="theme-switch-label">
+          <span class="theme-switch-icon left bi bi-sun"></span>
+          <span class="theme-switch-icon right bi bi-moon"></span>
+          <span class="theme-switch-ball"></span>
+        </label>
       </div>
     </div>
   </div>
-  <div class="narbar-collapse ms-auto">
-    <button id="theme-toggle"
-        class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-1 ms-lg-3 me-5"
-        type="button" aria-pressed="false" title="Basculer clair / sombre">
-        <i class="bi bi-moon"></i><span class="d-none d-sm-inline">Dark</span>
-    </button>
-  </div>
 </nav>
-<div class="hero-scene">
-  <p class="hero-slogan fx-typing">Révélez votre potentiel</p>
+
+
+<!-- Offcanvas menu -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title">Come Alive Fitness</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+
+  <div class="offcanvas-body d-flex flex-column justify-content-between">
+    <ul class="navbar-nav justify-content-center flex-grow-1 pe-3 gap-2">
+      <li class="nav-item"><a class="nav-link" href="{{ path('app_home') }}">ACCUEIL</a></li>
+      <li class="nav-item"><a class="nav-link" href="{{ path('app_abonnements') }}">ABONNEMENTS</a></li>
+      <li class="nav-item"><a class="nav-link" href="{{ path('seance_essai') }}">SÉANCE D'ESSAI</a></li>
+      <li class="nav-item"><a class="nav-link" href="{{ path('app_activites') }}">ACTIVITÉS</a></li>
+      <li class="nav-item"><a class="nav-link" href="https://app.peppy.cool/boxes/come-alive-fitness/cltek4trw3813961hql57rau7ve/schedule/?skipPlatformFees=true">PLANNING</a></li>
+      <li class="nav-item"><a class="nav-link" href="#contact">CONTACT</a></li>
+      <li class="nav-item"><a class="nav-link" href="#contact">OÙ NOUS TROUVER</a></li>
+    </ul>
+    <!-- Thème (mobile only) -->
+    <div class="mt-4 d-lg-none">
+      <div class="text-uppercase small text-muted mb-2">Apparence</div>
+      <div class="btn-group w-100 theme-segment" role="group" aria-label="Choisir le thème">
+        <button type="button" class="btn btn-outline-secondary theme-choice" data-mode="light">
+          <i class="bi bi-sun me-1"></i> Clair
+        </button>
+        <button type="button" class="btn btn-outline-secondary theme-choice" data-mode="dark">
+          <i class="bi bi-moon-stars me-1"></i> Sombre
+        </button>
+        <button type="button" class="btn btn-outline-secondary theme-choice" data-mode="auto">
+          <i class="bi bi-circle-half me-1"></i> Auto
+        </button>
+      </div>
+    </div> 
+  </div>
 </div>
+
+<div class="hero-scene">
+  <p class="hero-slogan fx-glitch">Révélez votre potentiel</p>
+</div>
+<script>
+(function(){
+  const nav = document.querySelector('.navbar-glass');
+  if(!nav) return;
+
+  function setOffset(){
+    const h = Math.ceil(nav.getBoundingClientRect().height);
+    document.body.style.paddingTop = h + 'px';
+  }
+
+  window.addEventListener('load', setOffset);
+  window.addEventListener('resize', setOffset);
+  // si ton thème change (data-bs-theme)
+  new MutationObserver(setOffset)
+    .observe(document.documentElement, { attributes:true, attributeFilter:['data-bs-theme'] });
+
+  setOffset();
+})();
+</script>
 
