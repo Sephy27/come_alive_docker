@@ -368,3 +368,39 @@ html, body {
 @media (prefers-reduced-motion: reduce){
   .reveal, .reveal-stagger > * { transition: none !important; transform: none !important; opacity: 1 !important; }
 }
+
+/* 1) Hover effects only on devices that actually have hover (desktop) */
+@media (hover:hover) and (pointer:fine) {
+  .card-hover {
+    will-change: transform;
+    transition: transform .18s ease, box-shadow .18s ease;
+  }
+  .card-hover:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(0,0,0,.12);
+  }
+}
+
+/* 2) Don’t let hover run while the reveal animation is still in progress */
+.reveal:not(.is-in) .card-hover { 
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* 3) Pricing-specific polish to avoid subtle “wobble” */
+#tarifs .card { 
+  transform-origin: center top;        /* stabilise the lift */
+}
+#tarifs .card .display-6 { 
+  line-height: 1;                      /* avoid text reflow while moving */
+}
+#tarifs .card .card-body {
+  min-height: 320px;                   /* keeps all three at the same height */
+}
+
+/* 4) If you prefer a gentler lift just for pricing: */
+@media (hover:hover) and (pointer:fine) {
+  #tarifs .card-hover:hover { 
+    transform: translateY(-4px);       /* softer for this section */
+  }
+}
