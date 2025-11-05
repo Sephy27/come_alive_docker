@@ -121,15 +121,136 @@
         <div class="col-md-6">{{ form_row(form.email) }}</div>
         <div class="col-md-6">{{ form_row(form.phone) }}</div>
         <div class="col-md-6">{{ form_row(form.goal) }}</div>
-        <div class="col-md-6">{{ form_row(form.class) }}</div>
+        <div class="col-md-4">{{ form_row(form.trialDate) }}</div>
+        <div class="mb-3 col-md-8">
+          <label class="form-label">Créneau disponible</label>
+          <select class="form-select js-trial-slot">
+            <option value="">Choisissez d’abord une date</option>
+          </select>
+          <div class="form-text">Les créneaux proposés dépendent du jour choisi.</div>
+        </div>
+
+        {# garde le champ caché mappé (en dehors de la grille si tu veux) #}
+        {{ form_widget(form.trialSlot) }}
+        
         <div class="col-12">{{ form_row(form.message) }}</div>
         <div class="col-12 d-flex gap-2 align-items-center">
           {{ form_widget(form.send) }}
           <small class="text-muted">Nous vous recontactons pour confirmer le créneau.</small>
         </div>
+        {{ form_errors(form) }}
+        {{ form_errors(form.trialDate) }}
+        {{ form_errors(form.trialSlot) }}
+
       {{ form_end(form) }}
+      {# JSON pur, lisible côté JS #}
+      <script id="week-events" type="application/json">
+        {{ events|json_encode(constant('JSON_UNESCAPED_UNICODE'))|raw }}
+      </script>
+
 
     </div>
+    <script>
+      (function(){
+        // 1) Récupère le JSON sans que le parseur JS voie du Twig
+        const el = document.getElementById('week-events');
+        let WEEK_EVENTS = [];
+        try { WEEK_EVENTS = JSON.parse(el?.textContent || '[]'); }
+        catch(e){ console.error('Invalid WEEK_EVENTS JSON', e); WEEK_EVENTS = []; }
+
+        // 2) Sélecteurs des champs (assure-toi que ces classes sont bien posées dans TrialRequestType)
+        const inputDate  = document.querySelector('.js-trial-date');
+        const selectSlot = document.querySelector('.js-trial-slot');
+        if (!inputDate || !selectSlot) return;
+
+        // 3) Conversions jour
+        // Date.getDay(): 0=dim,1=lun,... => on ramène à nos clés planning
+        const JS2KEY = ['sun','mon','tue','wed','thu','fri','sat'];
+
+        function dayKeyFromISO(iso){
+          if(!iso) return null;
+          // T12:00:00 pour éviter les surprises de fuseau (minuit)
+          const d = new Date(iso + 'T12:00:00');
+          if (isNaN(d)) return null;
+          return JS2KEY[d.getDay()];
+        }
+
+        // 4) Remplissage de la liste
+        function setOptions(items){
+          selectSlot.innerHTML = '';
+          if (!items.length){
+            const opt = new Option('Aucun créneau ce jour-là', '', true, true);
+            opt.disabled = true;
+            selectSlot.add(opt);
+            return;
+          }
+          selectSlot.add(new Option('Choisissez un créneau…', ''));
+          items.forEach(({label, value}) => {
+            selectSlot.add(new Option(label, value));
+          });
+        }
+
+        function onDateChange(){
+          const key = dayKeyFromISO(inputDate.value);   // ex: 'mon'
+          if(!key){ setOptions([]); return; }
+
+          // Filtre les events du jour, triés par heure
+          const slots = WEEK_EVENTS
+            .filter(ev => ev.day === key)
+            .sort((a,b) => a.start.localeCompare(b.start))
+            .map(ev => ({
+              label: `${ev.start} – ${ev.end} • ${ev.title}`,
+              value: JSON.stringify({
+                day: key,
+                start: ev.start,
+                end: ev.end,
+                title: ev.title,
+                type: ev.type || null
+              })
+            }));
+
+          setOptions(slots);
+        }
+
+        // 5) Boot + écoute
+        onDateChange();                 // pré-remplir si la date a déjà une valeur
+        inputDate.addEventListener('change', onDateChange);
+
+        // (facultatif) debug rapide :
+        // console.log('WEEK_EVENTS:', WEEK_EVENTS.length, WEEK_EVENTS);
+      })();
+      (function(){
+        const form       = document.querySelector('form'); // ou #reserver si tu as mis l'id
+        const selectSlot = document.querySelector('.js-trial-slot');
+        const hiddenSlot = document.querySelector('input[name$="[trialSlot]"]');
+
+        if (!form || !selectSlot || !hiddenSlot) return;
+
+        // au cas où : copie à chaque sélection (tu le fais déjà, mais on bétonne)
+        selectSlot.addEventListener('change', () => {
+          hiddenSlot.value = selectSlot.value || '';
+        });
+
+        // juste avant submit : si pas de créneau → on empêche et on affiche un message
+        form.addEventListener('submit', (e) => {
+          if (!hiddenSlot.value) {
+            e.preventDefault();
+            // feedback visuel simple
+            selectSlot.classList.add('is-invalid');
+            if (!selectSlot.nextElementSibling || !selectSlot.nextElementSibling.classList.contains('invalid-feedback')) {
+              const fb = document.createElement('div');
+              fb.className = 'invalid-feedback';
+              fb.textContent = 'Veuillez choisir un créneau.';
+              selectSlot.after(fb);
+            }
+            selectSlot.focus();
+          }
+        });
+      })();
+    </script>
+
+    
+
   </section>
 
   <!-- FAQ -->

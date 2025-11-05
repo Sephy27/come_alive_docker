@@ -1,15 +1,14 @@
-Come Alive Fitness — Nouvelle demande de séance d’essai
-=======================================================
+Nouvelle demande de séance d’essai
 
-Nom            : {{ t.lastName }}
-Prénom         : {{ t.firstName }}
-Email          : {{ t.email }}
-Téléphone      : {{ t.phone }}
-Objectif       : {{ t.goal|default('—') }}
-Cours souhaité : {{ t.class|default('—') }}
+Nom           : {{ t.lastName }}
+Prénom        : {{ t.firstName }}
+Email         : {{ t.email }}
+Téléphone     : {{ t.phone }}
+Objectif      : {{ t.goal|default('—') }}
+Date souhaitée: {{ trialDateStr|default('—') }}
+Cours souhaité: {% if slot %}{{ slot.start }}–{{ slot.end }} : {{ slot.title }}{% else %}—{% endif %}
+Message       : {{ t.message|default('—') }}
 
-Message :
-{{ t.message|default('—') }}
 
 Reçu le {{ t.createdAt|date('d/m/Y H:i') }}.
 Contact club : 07 63 88 60 92 — contact@comealivefitness.fr

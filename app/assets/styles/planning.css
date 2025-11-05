@@ -1,0 +1,264 @@
+.week-calendar{
+  --start-hour: 9;
+  --end-hour: 22;                   /* exclusif -> labels 09..21 */
+  --hour-h: 56px;
+  display: grid;
+  grid-template-columns: 70px repeat(7, minmax(120px,1fr));
+  grid-template-rows: 42px repeat(calc(var(--end-hour) - var(--start-hour)), var(--hour-h));
+  /* border: 1px solid var(--bs-border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--bs-body-bg);
+  grid-auto-flow: row;  */             /* pas d’auto-placement chelou */
+}
+
+.week-calendar > * { box-sizing: border-box; }
+
+/* Chaque cellule place sa colonne via la var --col */
+.wc-head, .time-col, .day-col { grid-column: var(--col); }
+.time-col, .day-col { grid-row: 2 / -1; }  /* sous l’en-tête */
+
+.wc-head{
+  display:flex; align-items:center; justify-content:center; font-weight:700;
+  border-bottom: 1px solid var(--bs-border-color);
+  background: color-mix(in srgb, var(--bs-body-bg), var(--bs-body-color) 3%);
+}
+.wc-head.time-col{ justify-content:flex-end; padding-right:.5rem; background: var(--bs-body-bg); }
+
+.time-col{
+  display:grid;
+  grid-template-rows: repeat(calc(var(--end-hour) - var(--start-hour)), var(--hour-h));
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0, transparent calc(var(--hour-h) - 1px),
+      var(--bs-border-color) calc(var(--hour-h) - 1px), var(--bs-border-color) var(--hour-h)
+    );
+}
+.time-label{ display:flex; align-items:flex-start; padding-top:2px; justify-content:flex-end; color:var(--bs-secondary-color); }
+
+.day-col{
+  position: relative;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0, transparent calc(var(--hour-h) - 1px),
+      var(--bs-border-color) calc(var(--hour-h) - 1px), var(--bs-border-color) var(--hour-h)
+    );
+}
+.wc-head:not(.time-col) { box-shadow: inset 1px 0 0 var(--bs-border-color); }
+.day-col + .day-col    { box-shadow: inset 1px 0 0 var(--bs-border-color); }
+
+/* Event box */
+.event{
+  position: absolute;
+  top: var(--top);
+  height: var(--height);
+
+   /* IMPORTANT pour que bordures/padding n'ajoutent pas de largeur */
+  box-sizing: border-box;
+  overflow: hidden;
+  min-width: 0;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+   /* corrige le placement horizontal (gaps cumulés) */
+  --gap: 6px;
+  width: calc( (100% - (var(--gap) * (var(--cc) - 1))) / var(--cc) );
+  left:  calc( var(--ci) * ( (100% - (var(--gap) * (var(--cc) - 1))) / var(--cc) + var(--gap) ) );
+
+  transition: transform .15s ease, box-shadow .15s ease;
+  z-index: 1;
+}
+.event:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,0,0,.12);
+  z-index: 5;
+}
+/* Styles généraux (restent visibles partout, y compris mobile) */
+.event .time  { display:block; font-weight:600; font-size:.78em; line-height:1.1; }
+.event .title { display:block; font-size:.86em; line-height:1.15; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+
+/* variantes couleurs */
+.event.ev-senior { background:#4da6ff20; border-color:#4da6ff; color:#0055aa; }
+.event.ev-flex { background:#c39bff20; border-color:#b073ff; color:#5a2d91; }
+.event.ev-functional { background:#0088ff20; border-color:#0088ff; color:#005db3; }
+.event.ev-straps { background:#cccccc20; border-color:#888; color:#333; }
+.event.ev-abs { background:#ff880020; border-color:#ff8800; color:#cc5500; }
+.event.ev-hybrid { background:#ff4d4d20; border-color:#ff4d4d; color:#991111; }
+.event.ev-dance { background:#51a7ff20; border-color:#3697ff; color:#0a4f8a; }
+.event.ev-yoga { background:#87d37c20; border-color:#57b957; color:#2c7a2c; }
+.event.ev-heels { background:#ffb3d920; border-color:#ff8fc8; color:#b83a7b; }
+.event.ev-jump { background:#ffd84d20; border-color:#ffcc00; color:#a67c00; }
+.event.ev-cardio { background:#2a86ff20; border-color:#2a86ff; color:#0c4188; }
+.event.ev-step { background:#3fd07e20; border-color:#28c76f; color:#147a42; }
+.event.ev-pole { background:#ff445520; border-color:#ff4455; color:#99202a; }
+.event.ev-hiit { background:#a56bff20; border-color:#9b50ff; color:#4a198c; }
+
+
+/* chevauchements: on aligne en colonnes */
+.day-col{ --gap: 4px; }
+
+/* Desktop + tablette : mode compact pour 30min */
+@media (min-width: 769px) {
+  .event--compact .time{ display:none; }
+  .event--compact .title{ font-size:.86em; }
+}
+
+
+
+/* -- ✅ Responsive Calendar -- */
+
+/* ----- COMPACT (cartes ≤ 30 min) UNIQUEMENT EN DESKTOP ----- */
+@media (min-width: 1025px) {
+  .event--compact .time { display: none; }
+  .event--compact .title { font-size: .86em; }
+}
+
+/* ----- Mobile + Tablette (≤ 1024px) : vue 1 jour ----- */
+@media (max-width: 1024px){
+  /* La grille devient un flux vertical */
+  .week-calendar{ 
+    display:block; 
+  }
+
+  /* On masque les en-têtes et la colonne des heures */
+  .week-calendar .wc-head,
+  .week-calendar .time-col{
+    display:none !important;
+  }
+
+  /* On masque toutes les colonnes de jours… */
+  .week-calendar .day-col{
+    display:none;
+    padding:0;
+    background:none;
+  }
+  /* … sauf celle marquée active par le JS */
+  .week-calendar .day-col.is-active{
+    display:block;
+    width:100%;
+  }
+
+  /* Les events redeviennent des cartes “liste” */
+  .week-calendar .day-col .event{
+    position: static !important;
+    left: auto;
+    width: 100% !important;
+    height: auto !important;
+    padding: .6rem .75rem;
+    margin-bottom: .5rem;
+    white-space: normal;
+    box-shadow: none;
+    transform: none;
+  }
+
+  /* En mobile/tablette, on affiche toujours l’heure */
+  .week-calendar .day-col .event .time{ display:block; }
+}
+
+/* ----- Desktop (≥ 1025px) : grille hebdomadaire ----- */
+@media (min-width: 1025px){
+  .week-calendar{
+    display: grid;
+    grid-template-columns: 70px repeat(7, minmax(120px,1fr));
+    grid-template-rows: 42px repeat(calc(var(--end-hour) - var(--start-hour)), var(--hour-h));
+  }
+
+  /* Ré-afficher l’en-tête et la colonne des heures */
+  .week-calendar .wc-head{ display:flex; }
+  .week-calendar .time-col{ display:grid; }
+}
+
+
+/* ============================
+   BOOST VISIBILITÉ EN DARK MODE
+   (Bootstrap : <html data-bs-theme="dark">…)
+   ============================ */
+
+:root[data-bs-theme="dark"] .week-calendar{
+  /* fond + lignes de grille plus visibles */
+  background: #0f1216;
+  --grid-line: rgba(255,255,255,.10);
+}
+
+:root[data-bs-theme="dark"] .week-calendar .wc-head{
+  background: rgba(255,255,255,.06);
+  border-bottom-color: var(--grid-line);
+  color: #e8eef6;
+}
+
+:root[data-bs-theme="dark"] .week-calendar .wc-head.time-col{
+  background: transparent;
+}
+
+:root[data-bs-theme="dark"] .week-calendar .time-col,
+:root[data-bs-theme="dark"] .week-calendar .day-col{
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent calc(var(--hour-h) - 1px),
+      var(--grid-line) calc(var(--hour-h) - 1px),
+      var(--grid-line) var(--hour-h)
+    );
+}
+
+:root[data-bs-theme="dark"] .week-calendar .time-label{
+  color: rgba(255,255,255,.7);
+}
+
+:root[data-bs-theme="dark"] .week-calendar .day-col + .day-col,
+:root[data-bs-theme="dark"] .week-calendar .wc-head:not(.time-col){
+  box-shadow: inset 1px 0 0 var(--grid-line);
+}
+
+/* Cartes : plus opaques, texte clair, bordure + Shadow léger */
+:root[data-bs-theme="dark"] .week-calendar .event{
+  color: #f7f9fc;
+  border-width: 1px;
+  box-shadow: 0 4px 10px rgba(0,0,0,.35);
+}
+
+/* Survol un peu plus lumineux */
+:root[data-bs-theme="dark"] .week-calendar .event:hover{
+  box-shadow: 0 8px 22px rgba(0,0,0,.5);
+  filter: brightness(1.05);
+}
+
+/* ——— Palettes d'événements renforcées en dark ——— */
+/* (on passe de ~20% d’opacité à ~38–46% pour gagner en lisibilité) */
+
+:root[data-bs-theme="dark"] .event.ev-senior     { background:#4da6ff40; border-color:#7bbdff; color:#eaf4ff; }
+:root[data-bs-theme="dark"] .event.ev-flex       { background:#b073ff40; border-color:#c79aff; color:#f4ecff; }
+:root[data-bs-theme="dark"] .event.ev-functional { background:#0088ff46; border-color:#33a3ff; color:#e9f4ff; }
+:root[data-bs-theme="dark"] .event.ev-straps     { background:#aaaaaa40; border-color:#d0d0d0; color:#ffffff; }
+:root[data-bs-theme="dark"] .event.ev-abs        { background:#ff880040; border-color:#ffad66; color:#fff5ec; }
+:root[data-bs-theme="dark"] .event.ev-hybrid     { background:#ff4d4d40; border-color:#ff7a7a; color:#fff2f2; }
+:root[data-bs-theme="dark"] .event.ev-dance      { background:#3697ff40; border-color:#66b2ff; color:#e9f3ff; }
+:root[data-bs-theme="dark"] .event.ev-yoga       { background:#57b95740; border-color:#7ad97a; color:#f2fff2; }
+:root[data-bs-theme="dark"] .event.ev-heels      { background:#ff8fc840; border-color:#ffb3dc; color:#fff7fd; }
+:root[data-bs-theme="dark"] .event.ev-jump       { background:#ffcc0040; border-color:#ffd94d; color:#fffbea; }
+:root[data-bs-theme="dark"] .event.ev-cardio     { background:#2a86ff40; border-color:#66a8ff; color:#eaf3ff; }
+:root[data-bs-theme="dark"] .event.ev-step       { background:#28c76f40; border-color:#58dfa0; color:#eafff4; }
+:root[data-bs-theme="dark"] .event.ev-pole       { background:#ff445540; border-color:#ff7782; color:#fff2f3; }
+:root[data-bs-theme="dark"] .event.ev-hiit       { background:#9b50ff40; border-color:#b784ff; color:#f7f1ff; }
+
+/* Petite ligne d’heure (si compact) encore lisible */
+:root[data-bs-theme="dark"] .event .time{
+  color: #f2f6ff;
+  text-shadow: 0 1px 0 rgba(0,0,0,.35);
+}
+
+/* Amélioration du contraste des “30 min compact” en sombre */
+@media (min-width: 769px){
+  :root[data-bs-theme="dark"] .event--compact .title{ 
+    font-weight: 700;
+    letter-spacing: .1px;
+  }
+}
+:root[data-bs-theme="dark"] .week-calendar.calendar-contrast-boost .event{
+  filter: saturate(1.1) brightness(1.06);
+}
+:root[data-bs-theme="dark"] .week-calendar.calendar-contrast-boost .event.ev-functional { background:#0088ff55; }

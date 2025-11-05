@@ -3,15 +3,13 @@ Come Alive Fitness — Confirmation de votre demande
 
 Bonjour {{ t.firstName }},
 
-Merci pour votre demande de séance d’essai !
-Nous revenons vers vous rapidement pour confirmer le créneau.
 
-Récapitulatif :
-- Nom : {{ t.lastName }}
-- Prénom : {{ t.firstName }}
-- Téléphone : {{ t.phone }}
-- Objectif : {{ t.goal|default('—') }}
-- Cours souhaité : {{ t.class|default('—') }}
+Nous avons bien reçu votre demande de séance d’essai.
+
+Date souhaitée : {{ trialDateStr|default('—') }}
+Cours choisi   : {% if slot %}{{ slot.start }}–{{ slot.end }} • {{ slot.title }}{% else %}—{% endif %}
+Message        : {{ t.message|default('—') }}
+
 
 Pour bien préparer votre venue :
 - Arrivez 20 minutes en avance (accueil & visite)

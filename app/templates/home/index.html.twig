@@ -48,7 +48,7 @@
         <div class="row text-center mt-4 g-3">
           <div class="col-4">
             <div class="kpi">
-              <div class="kpi-number">+300</div>
+              <div class="kpi-number">+200</div>
                 <div class="kpi-label">adhérents guidés</div>
             </div>
           </div>
@@ -74,7 +74,7 @@
 
         <div class="mt-4 d-flex gap-2">
           <a href="{{ path('seance_essai') }}" class="btn btn-primary">Séance d’essai</a>
-          <a href="#activites" class="btn btn-outline-dark">Voir les activités</a>
+          <a href="#activites" class="btn btn-outline-primary">Voir les activités</a>
         </div>
       </div>
 
@@ -112,6 +112,7 @@
             Une énérgie collective et du fun pour tous.', img: '/images/cardioland01.jpg' },
           { titre: 'HIIT', desc: 'Un fractionné à haute intensité, 30 secondes de travail intense, 30 secondes de récupération. 
             Une méthode ultra efficace !', img: '/images/hiit.jpg' },
+          { titre: 'Move n’ Dance', desc: 'Fun, cardio et stylé, des chorégraphies simples pour s’amuser.', img: '/images/move.jpg' },
           { titre: 'Functional Training', desc: 'Des compétences physiques à acquérir ou à améliorer.
             Perte de gras, plus de souffle, un corps plus fort, plus tonique et plus dessiné.', img: '/images/functional.jpg' },
           { titre: 'Hybrid Training', desc: 'L’alternance entre course à pied et ateliers fonctionnels. Venez vous surpasser.', img: '/images/hybrid.jpg' },
@@ -168,10 +169,13 @@
             <li class="list-group-item d-flex justify-content-between"><span>Vendredi</span><span>11:45 • 13:15 | 18:15 • 20:30 </span></li>
             <li class="list-group-item d-flex justify-content-between"><span>Samedi</span><span>10:00 • 13:00</span></li>
           </ul>
-          <a href="{{ path('seance_essai') }}" class="btn btn-primary mt-4">Réserver une séance d’essai</a>
+          <div class="mt-4 d-flex flex-wrap gap-2">
+            <a href="{{ path('seance_essai') }}" class="btn btn-primary btn-lg">Réserver une séance d’essai</a>
+            <a href="{{ path('app_planning') }}" class="btn btn-outline-primary btn-lg">Consulter le planning</a>
+          </div>
         </div>
         <div class="col-lg-6 d-none d-lg-block">
-          <a href="https://app.peppy.cool/boxes/come-alive-fitness/cltek4trw3813961hql57rau7ve/schedule/?skipPlatformFees=true"><img src="/images/peppy.png" class="img-fluid rounded-4" alt="logo application Peppy"></a>
+          <a href="#planning"><img src="/images/logo1.png" class="img-fluid rounded-4" alt="logo application Peppy"></a>
         </div>
       </div>
     </div>
@@ -207,7 +211,7 @@
               <ul class="list-unstyled text-start small">
                 <li><i class="bi bi-check2 me-2 text-success"></i>Engagement 12 mois</li>
                 <li><i class="bi bi-check2 me-2 text-success"></i>Frais de dossier : 50 €</li>
-                <li><i class="bi bi-x-lg me-2 text-success"></i>Accès illimité aux cours</li>
+                <li><i class="bi bi-check2 me-2 text-success"></i>Accès illimité aux cours</li>
               </ul>
               <a href="#contact" class="btn btn-primary">Je m’abonne</a>
             </div>

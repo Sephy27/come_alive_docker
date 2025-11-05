@@ -6,11 +6,15 @@
       <tr>
         <td align="center" style="padding:24px;">
           <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.05);">
-            <!-- Header -->
+            <!-- Header avec logo -->
             <tr>
-              <td style="background:#0d6efd;color:#ffffff;padding:20px 24px;">
-                <div style="font-size:18px;font-weight:800;letter-spacing:.3px;">Come Alive Fitness</div>
-                <div style="opacity:.9;margin-top:2px;">Nouvelle demande de séance d’essai</div>
+              <td align="center" style="background:#000;padding:0;">
+                <img src="{{ absolute_url(asset('images/bandeau4.png')) }}" alt="Come Alive Fitness" style="width:100%;max-width:600px;display:block;">
+              </td>
+            </tr>
+            <tr>
+              <td style="background:#0d6efd;color:#fff;padding:14px 24px;font-size:18px;font-weight:700;">
+                Nouvelle demande de séance d’essai
               </td>
             </tr>
 
@@ -22,41 +26,51 @@
                 </p>
 
                 <!-- Infos principales -->
-                <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="border:1px solid #e5e7eb;border-radius:8px;overflow:hidden;margin:12px 0;">
+                <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:separate;border-spacing:0 6px;">
                   <tr>
-                    <td style="background:#fafafa;padding:10px 12px;width:180px;color:#6b7280;font-size:14px;">Nom</td>
+                    <td style="padding:10px 12px;color:#6b7280;font-size:14px;width:160px;">Nom</td>
                     <td style="padding:10px 12px;color:#1f2937;font-size:14px;">{{ t.lastName }}</td>
                   </tr>
                   <tr>
-                    <td style="background:#fafafa;padding:10px 12px;color:#6b7280;font-size:14px;">Prénom</td>
+                    <td style="padding:10px 12px;color:#6b7280;font-size:14px;">Prénom</td>
                     <td style="padding:10px 12px;color:#1f2937;font-size:14px;">{{ t.firstName }}</td>
                   </tr>
                   <tr>
-                    <td style="background:#fafafa;padding:10px 12px;color:#6b7280;font-size:14px;">Email</td>
-                    <td style="padding:10px 12px;font-size:14px;">
-                      <a href="mailto:{{ t.email }}" style="color:#0d6efd;text-decoration:none;">{{ t.email }}</a>
-                    </td>
+                    <td style="padding:10px 12px;color:#6b7280;font-size:14px;">Email</td>
+                    <td style="padding:10px 12px;color:#1f2937;font-size:14px;">{{ t.email }}</td>
                   </tr>
                   <tr>
-                    <td style="background:#fafafa;padding:10px 12px;color:#6b7280;font-size:14px;">Téléphone</td>
-                    <td style="padding:10px 12px;font-size:14px;">
-                      <a href="tel:{{ t.phone }}" style="color:#0d6efd;text-decoration:none;">{{ t.phone }}</a>
-                    </td>
+                    <td style="padding:10px 12px;color:#6b7280;font-size:14px;">Téléphone</td>
+                    <td style="padding:10px 12px;color:#1f2937;font-size:14px;">{{ t.phone }}</td>
                   </tr>
                   <tr>
-                    <td style="background:#fafafa;padding:10px 12px;color:#6b7280;font-size:14px;">Objectif</td>
+                    <td style="padding:10px 12px;color:#6b7280;font-size:14px;">Objectif</td>
                     <td style="padding:10px 12px;color:#1f2937;font-size:14px;">{{ t.goal ?? '—' }}</td>
                   </tr>
+
+                  {# ✅ Date souhaitée (toujours visible) #}
                   <tr>
-                    <td style="background:#fafafa;padding:10px 12px;color:#6b7280;font-size:14px;">Cours souhaité</td>
-                    <td style="padding:10px 12px;color:#1f2937;font-size:14px;">{{ t.class ?? '—' }}</td>
+                    <td style="padding:10px 12px;color:#6b7280;font-size:14px;">Date souhaitée</td>
+                    <td style="padding:10px 12px;color:#1f2937;font-size:14px;">{{ trialDateStr ?? '—' }}</td>
                   </tr>
+
+                  {# ✅ Cours choisi (si un slot a été sélectionné) #}
                   <tr>
-                    <td style="background:#fafafa;padding:10px 12px;color:#6b7280;font-size:14px;vertical-align:top;">Message</td>
-                    <td style="padding:10px 12px;color:#1f2937;font-size:14px;white-space:pre-line;">{{ t.message ?? '—' }}</td>
+                    <td style="padding:10px 12px;color:#6b7280;font-size:14px;">Cours souhaité</td>
+                    <td style="padding:10px 12px;color:#1f2937;font-size:14px;">
+                      {% if slot %}
+                        {{ slot.start }} – {{ slot.end }} : {{ slot.title }}
+                      {% else %}
+                        —
+                      {% endif %}
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td style="padding:10px 12px;color:#6b7280;font-size:14px;">Message</td>
+                    <td style="padding:10px 12px;color:#1f2937;font-size:14px;">{{ t.message|default('—')|nl2br }}</td>
                   </tr>
                 </table>
-
                 <!-- CTA -->
                 <div style="margin-top:16px;">
                   <a href="mailto:{{ t.email }}" style="display:inline-block;background:#0d6efd;color:#ffffff;text-decoration:none;padding:10px 14px;border-radius:8px;font-weight:600;">

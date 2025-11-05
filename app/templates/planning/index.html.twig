@@ -1,0 +1,222 @@
+{% extends 'base.html.twig' %}
+{% block title %}Planning{% endblock %}
+
+{% block body %}
+<section class="py-5">
+  <div class="container">
+    <h1 class="section-title h1 mb-4">Planning hebdomadaire</h1>
+
+    {# Contrôles mobile : visibles uniquement ≤ md #}
+    <div class="mobile-week-controls d-xl-none mb-3">
+    <div class="input-group">
+        <button class="btn btn-outline-secondary" type="button" id="day-prev" aria-label="Jour précédent">
+        <i class="bi bi-chevron-left"></i>
+        </button>
+
+        <select class="form-select text-capitalize" id="day-select" aria-label="Choisir un jour">
+        <option value="mon">lundi</option>
+        <option value="tue">mardi</option>
+        <option value="wed">mercredi</option>
+        <option value="thu">jeudi</option>
+        <option value="fri">vendredi</option>
+        <option value="sat">samedi</option>
+        <option value="sun">dimanche</option>
+        </select>
+
+        <button class="btn btn-outline-secondary" type="button" id="day-next" aria-label="Jour suivant">
+        <i class="bi bi-chevron-right"></i>
+        </button>
+    </div>
+    </div>
+
+    <div class="week-calendar calendar-contrast-boost" style="--start-hour: {{ H_START }}; --end-hour: {{ H_END }};">
+
+      {# --- En-têtes (col 1 = heures, jours commencent à 2) --- #}
+      <div class="wc-head time-col" style="--col: 1;"></div>
+      {% set day_labels = ['lundi','mardi','mercredi','jeudi','vendredi','samedi','dimanche'] %}
+      {% for lbl in day_labels %}
+        <div class="wc-head" style="--col: {{ loop.index + 1 }};">{{ lbl }}</div>
+      {% endfor %}
+
+      {# --- Colonne heures : H_START ..(H_END-1) = nb de lignes --- #}
+      <div class="time-col" style="--col: 1;">
+        {% for h in H_START..(H_END - 1) %}
+          <div class="time-label">{{ '%02d'|format(h) }} h</div>
+        {% endfor %}
+      </div>
+
+      {# --- Colonnes jours avec événements dynamiques --- #}
+        {% set day_keys   = ['mon','tue','wed','thu','fri','sat','sun'] %}
+        {% set day_labels = ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'] %}
+
+        {% for i in 0..6 %}
+        <div class="day-col"
+            data-day="{{ day_keys[i] }}"
+            data-label="{{ day_labels[i] }}"
+            style="--col: {{ i + 2 }};">
+            
+            {% for ev in events %}
+                {% if ev.day == day_keys[i] %}
+                <div class="event ev-{{ ev.type }}"
+                    data-start="{{ ev.start }}" data-end="{{ ev.end }}">
+                    <div class="time">{{ ev.start }} – {{ ev.end }}</div>
+                    <div class="title">{{ ev.title }}</div>
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        {% endfor %}
+
+
+    </div>
+
+    
+  </div>
+  <div class="text-center mt-4">
+      <a href="{{ path('app_home') }}" class="btn btn-outline-secondary">← Retour à l’accueil</a>
+  </div>
+</section>
+
+<script>
+(function () {
+  let resizeBound = false;
+
+  // -------- core --------
+  function initWeekCalendar() {
+    const CAL = document.querySelector('.week-calendar');
+    if (!CAL) return;
+
+    const cs    = getComputedStyle(CAL);
+    const H0    = parseInt(cs.getPropertyValue('--start-hour')) || 6;
+    const hourH = parseFloat(cs.getPropertyValue('--hour-h')) || 56;
+    const toMin = s => { const [h, m] = s.split(':').map(Number); return h * 60 + (m || 0); };
+
+    document.querySelectorAll('.day-col').forEach(col => {
+      // 1) Position verticale + compact si ≤ 30 min
+      const evs = [...col.querySelectorAll('.event')].map(el => {
+        const start = toMin(el.dataset.start);
+        const end   = toMin(el.dataset.end);
+        const dur   = end - start;
+
+        el.style.setProperty('--top',    `${((start / 60) - H0) * hourH}px`);
+        el.style.setProperty('--height', `${((end - start) / 60) * hourH}px`);
+
+        // (re)calibrage de la classe compacte
+        el.classList.toggle('event--compact', dur <= 30);
+
+        return { el, start, end };
+      }).sort((a, b) => a.start - b.start);
+
+      if (!evs.length) return;
+
+      // 2) Clusters d’overlaps
+      const clusters = [];
+      let cur = [], curEnd = -Infinity;
+
+      evs.forEach(e => {
+        if (!cur.length || e.start < curEnd) {
+          cur.push(e);
+          curEnd = Math.max(curEnd, e.end);
+        } else {
+          clusters.push(cur);
+          cur = [e];
+          curEnd = e.end;
+        }
+      });
+      if (cur.length) clusters.push(cur);
+
+      // 3) Colonnes par grappe (greedy)
+      clusters.forEach(group => {
+        const colEnd = [];
+        group.forEach(e => {
+          let k = 0;
+          while (k < colEnd.length && e.start < colEnd[k]) k++;
+          colEnd[k] = e.end;
+          e.el.style.setProperty('--ci', k);
+          e.el.style.setProperty('--cc', colEnd.length); // provisoire
+        });
+        const CC = colEnd.length;
+        group.forEach(e => e.el.style.setProperty('--cc', CC)); // fixe le total
+      });
+    });
+
+    // 4) (facultatif) écoute resize une seule fois
+    if (!resizeBound) {
+      window.addEventListener('resize', () => {
+        // les largeurs sont en %, rien à recalculer,
+        // mais on peut relancer pour sécuriser si tu modifies --hour-h dynamiquement
+        requestAnimationFrame(initWeekCalendar);
+      }, { passive: true });
+      resizeBound = true;
+    }
+  }
+
+  // Expose pour Turbo / re-renders
+  window.initWeekCalendar = initWeekCalendar;
+
+  // Hooks de démarrage
+  const boot = () => requestAnimationFrame(initWeekCalendar);
+  if (document.readyState !== 'loading') boot();
+  else document.addEventListener('DOMContentLoaded', boot);
+
+  // Hotwire Turbo (si présent)
+  window.addEventListener?.('turbo:load',   boot);
+  window.addEventListener?.('turbo:render', boot);
+})();
+</script>
+<script>
+(function(){
+  const DAY_KEYS   = ['mon','tue','wed','thu','fri','sat','sun'];
+  const DAY_LABELS = ['lundi','mardi','mercredi','jeudi','vendredi','samedi','dimanche'];
+
+  const select = document.getElementById('day-select');
+  const prev   = document.getElementById('day-prev');
+  const next   = document.getElementById('day-next');
+
+  if(!select) return; // sécurité si pas en mobile
+
+  function setActiveDay(key){
+    document.querySelectorAll('.week-calendar .day-col')
+      .forEach(col => col.classList.toggle('is-active', col.dataset.day === key));
+    // synchro UI
+    select.value = key;
+    history.replaceState(null, '', '#'+key); // ex: #wed (facultatif)
+  }
+
+  function todayKey(){
+    // map JS (0=dimanche) -> notre tableau
+    const d = new Date().getDay(); // 0..6
+    return ['sun','mon','tue','wed','thu','fri','sat'][d] || 'mon';
+    // -> lundi par défaut si souci
+  }
+
+  function initDefault(){
+    // priorité au hash (#mon, #tue, …) si présent
+    const hash = (location.hash || '').replace('#','');
+    const initial = DAY_KEYS.includes(hash) ? hash : todayKey();
+    // si on est dimanche (#sun) et que tu veux commencer à lundi : à toi d’adapter ici
+    setActiveDay(initial);
+  }
+
+  // événements
+  select.addEventListener('change', e => setActiveDay(e.target.value));
+
+  function shift(delta){
+    const idx = DAY_KEYS.indexOf(select.value);
+    const nextIdx = (idx + delta + DAY_KEYS.length) % DAY_KEYS.length;
+    setActiveDay(DAY_KEYS[nextIdx]);
+  }
+  prev.addEventListener('click', () => shift(-1));
+  next.addEventListener('click', () => shift(1));
+
+  // Boot
+  initDefault();
+
+  // Si Hotwire Turbo est utilisé, réapplique après rendu
+  window.addEventListener?.('turbo:render', initDefault);
+})();
+</script>
+
+
+{% endblock %}
+

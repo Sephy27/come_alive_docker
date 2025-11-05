@@ -30,18 +30,19 @@
                 </p>
 
                 <p style="margin:0 0 18px 0;color:#1f2937;font-size:15px;line-height:1.5;">
-                  Votre demande de <strong>séance d’essai</strong> a bien été prise en compte.
-                  Nous allons revenir vers vous rapidement avec la date exacte.
+                  Nous avons bien reçu votre demande de séance d’essai.
                 </p>
 
-                <h3 style="font-size:15px;color:#111;font-weight:600;margin-bottom:8px;">Votre demande :</h3>
-                <table width="100%" style="border:1px solid #e5e7eb;border-radius:6px;margin-bottom:20px;">
-                  <tr><td style="padding:8px 10px;background:#fafafa">Nom :</td><td style="padding:8px 10px">{{ t.lastName }}</td></tr>
-                  <tr><td style="padding:8px 10px;background:#fafafa">Prénom :</td><td style="padding:8px 10px">{{ t.firstName }}</td></tr>
-                  <tr><td style="padding:8px 10px;background:#fafafa">Téléphone :</td><td style="padding:8px 10px"><a href="tel:{{ t.phone }}" style="color:#0d6efd;text-decoration:none">{{ t.phone }}</a></td></tr>
-                  <tr><td style="padding:8px 10px;background:#fafafa">Objectif :</td><td style="padding:8px 10px">{{ t.goal ?? '—' }}</td></tr>
-                  <tr><td style="padding:8px 10px;background:#fafafa">Cours souhaité :</td><td style="padding:8px 10px">{{ t.class ?? '—' }}</td></tr>
-                </table>
+                <ul style="margin:0 0 16px;padding-left:16px;">
+                  <li><strong>Date souhaitée :</strong> {{ trialDateStr|default('—') }}</li>
+                  <li><strong>Cours choisi :</strong>
+                    {% if slot %}{{ slot.start }} – {{ slot.end }} • {{ slot.title }}{% else %}—{% endif %}
+                  </li>
+                </ul>
+
+                <p style="margin:0 0 12px;">
+                  Message : {{ t.message|default('—')|nl2br }}
+                </p>
 
                 <!-- Bouton Ajouter au calendrier -->
                 <table align="center">

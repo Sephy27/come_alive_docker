@@ -40,6 +40,14 @@ class TrialRequest
     #[ORM\Column(type: 'text', nullable: true)]
     private ?string $message = null;
 
+    #[ORM\Column(type: 'date', nullable: true)]
+    #[Assert\NotBlank]
+    private ?\DateTimeInterface $trialDate = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\NotBlank]
+    private ?string $trialSlot = null;
+
     #[ORM\Column]
     private \DateTimeImmutable $createdAt;
 
@@ -65,4 +73,8 @@ class TrialRequest
     public function getMessage(): ?string { return $this->message; }
     public function setMessage(?string $v): self { $this->message = $v; return $this; }
     public function getCreatedAt(): \DateTimeImmutable { return $this->createdAt; }
+    public function getTrialDate(): ?\DateTimeInterface { return $this->trialDate; }
+    public function setTrialDate(?\DateTimeInterface $d): self { $this->trialDate = $d; return $this; }
+    public function getTrialSlot(): ?string { return $this->trialSlot; }
+    public function setTrialSlot(?string $s): self { $this->trialSlot = $s; return $this; }
 }
