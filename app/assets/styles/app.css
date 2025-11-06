@@ -398,9 +398,32 @@ html, body {
   min-height: 320px;                   /* keeps all three at the same height */
 }
 
+/* --- Alignement vertical des boutons dans la section tarifs --- */
+#tarifs .card-body {
+  position: relative;
+  padding-bottom: 4rem; /* réserve de place pour le bouton */
+}
+
+#tarifs .card-body a.btn {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#tarifs .card {
+  min-height: 200px; /* ajuste selon ton contenu */
+}
+
+
+
 /* 4) If you prefer a gentler lift just for pricing: */
 @media (hover:hover) and (pointer:fine) {
   #tarifs .card-hover:hover { 
     transform: translateY(-4px);       /* softer for this section */
   }
 }
+
+/* planning – click sur un événement */
+.week-calendar .event{ cursor: pointer; }
+.week-calendar .event:focus-visible{ outline: 2px solid var(--bs-primary); outline-offset: 2px; }
