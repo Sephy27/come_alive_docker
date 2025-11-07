@@ -76,186 +76,216 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-//--------planning modal----------------
-(function attachCourseModal(){
-  const CAL = document.querySelector('.week-calendar');
-  if (!CAL) return;
+// -------- Planning : modale cours --------
+(function () {
 
-  // --- mapping "activité" -> {titre, desc, img}
-  const MAP = {
+  function attachCourseModal() {
+    const CAL = document.querySelector('.week-calendar');
+    if (!CAL) return;
+
+    // ✅ Empêche de ré-attacher plusieurs fois (Turbo, reload partiel, etc.)
+    if (CAL.dataset.modalBound === '1') {
+      return;
+    }
+    CAL.dataset.modalBound = '1';
+
+   const MAP = {
     'STEP': {
-      titre:'Step',
-      desc:"Cardio chorégraphié, fun et mémorisation. Débutant à confirmé.",
-      img:'/images/step.jpg'
+      titre: 'Step',
+      desc: "Chorégraphie cardio, fun et accessible.",
+      img: '/images/step.jpg'
+    },
+    'STEP DEBUTANT': {
+      titre: 'Step Débutant',
+      desc: "Apprentissage des bases du step en douceur, parfait pour débuter.",
+      img: '/images/step.jpg'
     },
     'CARDIOLAND': {
-      titre:'Cardioland',
-      desc:"Brûle-calories, endurance et énergie collective.",
-      img:'/images/cardioland01.jpg'
+      titre: 'Cardioland',
+      desc: "Séance cardio ludique pour brûler des calories et booster l’endurance.",
+      img: '/images/cardioland01.jpg'
     },
     'HIIT': {
-      titre:'HIIT',
-      desc:"Intervalles haute intensité, efficacité maximale.",
-      img:'/images/hiit.jpg'
+      titre: 'HIIT',
+      desc: "Intervalles haute intensité pour des résultats maximum en peu de temps.",
+      img: '/images/hiit.jpg'
     },
     'FUNCTIONAL TRAINING': {
-      titre:'Functional Training',
-      desc:"Force, tonicité et souffle avec des mouvements efficaces.",
-      img:'/images/functional.jpg'
+      titre: 'Functional Training',
+      desc: "Renforcement complet, mobilité et cardio avec des mouvements fonctionnels.",
+      img: '/images/functional.jpg'
     },
     'HYBRID TRAINING': {
-      titre:'Hybrid Training',
-      desc:"Course + ateliers fonctionnels. On se surpasse !",
-      img:'/images/hybrid.jpg'
+      titre: 'Hybrid Training',
+      desc: "Mix explosif de course, renfo et cardio. Idéal pour se dépasser.",
+      img: '/images/hybrid.jpg'
     },
     'SOUPLESSE': {
-      // alias vers Souplesse Yoga Pilates
-      titre:'Souplesse Yoga Pilates',
-      desc:"Mobilité, détente musculaire, posture et muscles profonds.",
-      img:'/images/souplesse.jpg'
+      titre: 'Souplesse Yoga Pilates',
+      desc: "Mobilité, étirements et gainage profond pour un corps plus libre.",
+      img: '/images/souplesse.jpg'
     },
-    'SOUPLESSE YOGA PILATE': { // au cas où
-      titre:'Souplesse Yoga Pilates',
-      desc:"Mobilité, détente musculaire, posture et muscles profonds.",
-      img:'/images/souplesse.jpg'
+    'SOUPLESSE YOGA PILATE': {
+      titre: 'Souplesse Yoga Pilates',
+      desc: "Mobilité, étirements et gainage profond pour un corps plus libre.",
+      img: '/images/souplesse.jpg'
     },
     'GYM SENIOR': {
-      titre:'Gym Sénior',
-      desc:"Équilibre, mobilité, force : séances adaptées et sécurisées.",
-      img:'/images/gym.jpg'
+      titre: 'Gym Sénior',
+      desc: "Séance douce et sécurisée pour entretenir mobilité, équilibre et tonus.",
+      img: '/images/gym.jpg'
     },
     'MARCHE NORDIQUE': {
-      titre:'Marche Nordique / Running',
-      desc:"Cardio en plein air, technique et progression en groupe.",
-      img:'/images/running.jpg'
+      titre: 'Marche Nordique / Running',
+      desc: "Cardio en extérieur, technique et convivialité.",
+      img: '/images/running.jpg'
     },
     'RUNNING': {
-      titre:'Marche Nordique / Running',
-      desc:"Cardio en plein air, technique et progression en groupe.",
-      img:'/images/running.jpg'
+      titre: 'Marche Nordique / Running',
+      desc: "Cardio en extérieur, technique et convivialité.",
+      img: '/images/running.jpg'
     },
     'STADE': {
-      titre:'Stade',
-      desc:"Foulée, agilité, vitesse : travail technique varié.",
-      img:'/images/stade.jpg'
+      titre: 'Stade',
+      desc: "Travail technique, vitesse et agilité en plein air.",
+      img: '/images/stade.jpg'
     },
     "MOVE N'DANCE": {
-      titre:"Move n’ Dance",
-      desc:"Choré simples, fun et cardio.",
-      img:'/images/move.jpg'
+      titre: "Move N'Dance",
+      desc: "Chorés simples, ambiance fun, parfait pour se lâcher.",
+      img: '/images/move.jpg'
     },
     'FIT DANCE': {
-      titre:'Fit Dance',
-      desc:"On construit la choré pendant le cours.",
-      img:'/images/fitdance.jpg'
+      titre: 'Fit Dance',
+      desc: "On construit une choré au fil du cours, dynamique et ludique.",
+      img: '/images/fitdance.jpg'
     },
     'HEELS': {
-      titre:'Heels',
-      desc:'Danse sur talons, stylée et assumée.',
-      img:'/images/heels.jpg'
+      titre: 'Heels',
+      desc: "Danse sur talons, assurance, sensualité et style.",
+      img: '/images/heels.jpg'
     },
     'JUMP': {
-      titre:'Jump',
-      desc:"Mini-trampoline : cardio fun, corps tonique, sans impact.",
-      img:'/images/cardioland.jpg'
+      titre: 'Jump',
+      desc: "Mini-trampoline pour un cardio fun, sans impact articulaire.",
+      img: '/images/cardioland.jpg'
     },
     'SANGLES': {
-      titre:'Sangles',
-      desc:"TRX : force, stabilité, posture – tout niveau.",
-      img:'/images/sangles.jpg'
+      titre: 'Sangles',
+      desc: "TRX : renfo global, stabilité et gainage.",
+      img: '/images/sangles.jpg'
     },
     'FLYING POLE': {
-      titre:'Flying pole dance',
-      desc:"Pole suspendue : activité unique pour se révéler.",
-      img:'/images/flying.jpg'
+      titre: 'Flying Pole',
+      desc: "Barre de Pole suspendue : force, grâce et défis aériens.",
+      img: '/images/flying.jpg'
     },
     'YOGA': {
-      titre:'Yoga',
-      desc:'Souplesse, respiration et recentrage.',
-      img:'/images/souplesse.jpg'
+      titre: 'Yoga',
+      desc: "Respiration, mobilité, recentrage : un moment pour soi.",
+      img: '/images/souplesse.jpg'
     },
-    'STEP DÉBUTANT': {
-      titre:'Step',
-      desc:"Version accessible pour apprendre sans stress.",
-      img:'/images/step.jpg'
+    'ABDOS FLASH': {
+      titre: 'Abdos Flash',
+      desc: "Ciblage express de la sangle abdominale en 30 minutes.",
+      img: '/images/abdos.jpg' 
     }
   };
 
-  const DAY_FR = {mon:'lundi', tue:'mardi', wed:'mercredi', thu:'jeudi', fri:'vendredi', sat:'samedi', sun:'dimanche'};
 
-  function normTitle(s){
-    return (s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'') // supprime accents
-             .toUpperCase().trim();
-  }
-
-  function openModalFromEvent(el){
-    const col = el.closest('.day-col');
-    const dayKey = col?.dataset.day || 'mon';
-    const dayLbl = DAY_FR[dayKey] || dayKey;
-
-    const time = el.querySelector('.time')?.textContent?.trim() || '';
-    const rawTitle = el.querySelector('.title')?.textContent?.trim() || '';
-    const key = normTitle(rawTitle);
-
-    const meta = MAP[key] || {
-      titre: rawTitle || 'Cours',
-      desc: "Pour ce cours, la description détaillée sera prochainement ajoutée.",
-      img:  '/images/functional.jpg'
+    const DAY_FR = {
+      mon:'lundi', tue:'mardi', wed:'mercredi',
+      thu:'jeudi', fri:'vendredi', sat:'samedi', sun:'dimanche'
     };
 
-    // Alimente la modale
-    const $title = document.getElementById('cm-title');
-    const $desc  = document.getElementById('cm-desc');
-    const $img   = document.getElementById('cm-img');
-    const $when  = document.getElementById('cm-when');
-    const $cta   = document.getElementById('cm-cta');
+    function normTitle(s){
+      return (s || '')
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g,'')
+        .toUpperCase()
+        .trim();
+    }
 
-    $title.textContent = meta.titre;
-    $desc.textContent  = meta.desc;
-    $img.style.backgroundImage = `url('${meta.img}')`;
-    $when.textContent  = `${dayLbl} • ${time}`;
+    function openModalFromEvent(el){
+      const col    = el.closest('.day-col');
+      const dayKey = col?.dataset.day || 'mon';
+      const dayLbl = DAY_FR[dayKey] || dayKey;
+      const baseSeanceUrl = CAL.dataset.seanceUrl || '/seance-essai';
 
-    // Lien vers la page d'essai pré-remplie
-    // On tente d’extraire "HH:MM – HH:MM"
-    const m = time.match(/(\d{2}:\d{2})\s*[\-–]\s*(\d{2}:\d{2})/);
-    const start = m ? m[1] : '';
-    const end   = m ? m[2] : '';
+      const time     = el.querySelector('.time')?.textContent?.trim() || '';
+      const rawTitle = el.querySelector('.title')?.textContent?.trim() || '';
+      const key      = normTitle(rawTitle);
 
-    const url = new URL('{{ path("seance_essai") }}', window.location.origin);
-    // pas de date ici (planning hebdo), l’utilisateur choisira — tu peux aussi calculer la prochaine occurrence si tu veux
-    url.searchParams.set('title', meta.titre);
-    if (start) url.searchParams.set('start', start);
-    if (end)   url.searchParams.set('end', end);
-    $cta.href = url.toString();
+      const meta = MAP[key] || {
+        titre: rawTitle || 'Cours',
+        desc: "Pour ce cours, la description détaillée sera prochainement ajoutée.",
+        img:  '/images/functional.jpg'
+      };
 
-    // Ouvre la modale
-    new bootstrap.Modal(document.getElementById('courseModal')).show();
+      const $title = document.getElementById('cm-title');
+      const $desc  = document.getElementById('cm-desc');
+      const $img   = document.getElementById('cm-img');
+      const $when  = document.getElementById('cm-when');
+      const $cta   = document.getElementById('cm-cta');
+      const $modal = document.getElementById('courseModal');
+
+      if (!$title || !$desc || !$img || !$when || !$cta || !$modal) return;
+
+      $title.textContent = meta.titre;
+      $desc.textContent  = meta.desc;
+      $img.style.backgroundImage = `url('${meta.img}')`;
+      $when.textContent  = `${dayLbl} • ${time}`;
+
+      const m = time.match(/(\d{2}:\d{2})\s*[\-–]\s*(\d{2}:\d{2})/);
+      const start = m ? m[1] : '';
+      const end   = m ? m[2] : '';
+
+      const url = new URL(baseSeanceUrl, window.location.origin);
+      url.searchParams.set('title', meta.titre);
+      if (start) url.searchParams.set('start', start);
+      if (end)   url.searchParams.set('end', end);
+      $cta.href = url.toString();
+
+      const modal = bootstrap.Modal.getOrCreateInstance($modal);
+      modal.show();
+    }
+
+    // Délégation clic
+    CAL.addEventListener('click', (ev) => {
+      const card = ev.target.closest('.event');
+      if (!card) return;
+      openModalFromEvent(card);
+    });
+
+    // Clavier
+    CAL.addEventListener('keydown', (ev) => {
+      if (ev.key !== 'Enter' && ev.key !== ' ') return;
+      const card = ev.target.closest('.event');
+      if (!card) return;
+      ev.preventDefault();
+      openModalFromEvent(card);
+    });
+
+    // Focusable
+    CAL.querySelectorAll('.event').forEach(e => {
+      e.setAttribute('tabindex','0');
+    });
   }
 
-  // Délégation : un seul écouteur pour toutes les cartes
-  CAL.addEventListener('click', (ev) => {
-    const card = ev.target.closest('.event');
-    if (!card) return;
-    openModalFromEvent(card);
-  });
+  // Init classique
+  if (document.readyState !== 'loading') {
+    attachCourseModal();
+  } else {
+    document.addEventListener('DOMContentLoaded', attachCourseModal);
+  }
 
-  // Optionnel : hint au clavier
-  CAL.addEventListener('keydown', (ev) => {
-    if (ev.key !== 'Enter' && ev.key !== ' ') return;
-    const card = ev.target.closest('.event');
-    if (!card) return;
-    ev.preventDefault();
-    openModalFromEvent(card);
-  });
+  // Turbo (si utilisé)
+  window.addEventListener?.('turbo:load', attachCourseModal);
+  window.addEventListener?.('turbo:render', attachCourseModal);
 
-  // Accessibilité : rendre les events focusables
-  CAL.querySelectorAll('.event').forEach(e => e.setAttribute('tabindex','0'));
-
-  // Hotwire/Turbo : si tu re-rends la page
-  window.addEventListener?.('turbo:render', () => {
-    CAL.querySelectorAll('.event').forEach(e => e.setAttribute('tabindex','0'));
-  });
 })();
+
+
 
 
 

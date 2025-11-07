@@ -38,14 +38,14 @@ final class WeekScheduleProvider
             ['day'=>'wed','start'=>'18:00','end'=>'18:30','title'=>'JUMP','type'=>'jump'],
             ['day'=>'wed','start'=>'18:30','end'=>'19:15','title'=>'YOGA','type'=>'yoga'],
             ['day'=>'wed','start'=>'19:15','end'=>'20:00','title'=>"MOVE N'DANCE",'type'=>'dance'],
-            ['day'=>'wed','start'=>'20:00','end'=>'21:00','title'=>'HYBRID TRAINNING','type'=>'hybrid'],
+            ['day'=>'wed','start'=>'20:00','end'=>'21:00','title'=>'HYBRID TRAINING','type'=>'hybrid'],
 
             // JEUDI
             ['day'=>'thu','start'=>'18:00','end'=>'18:45','title'=>'FLYING POLE','type'=>'pole'],
             ['day'=>'thu','start'=>'18:00','end'=>'18:45','title'=>'SOUPLESSE','type'=>'flex'],
             ['day'=>'thu','start'=>'18:45','end'=>'19:30','title'=>'JUMP','type'=>'jump'],
             ['day'=>'thu','start'=>'19:30','end'=>'20:15','title'=>'FUNCTIONAL TRAINING','type'=>'functional'],
-            ['day'=>'thu','start'=>'20:15','end'=>'21:15','title'=>'HYBRID TRAINNING','type'=>'hybrid'],
+            ['day'=>'thu','start'=>'20:15','end'=>'21:15','title'=>'HYBRID TRAINING','type'=>'hybrid'],
 
             // VENDREDI
             ['day'=>'fri','start'=>'11:45','end'=>'12:30','title'=>'GYM SÉNIOR','type'=>'senior'],
