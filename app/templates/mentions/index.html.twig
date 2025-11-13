@@ -1,0 +1,132 @@
+{# templates/mentions/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Mentions légales — Come Alive Fitness{% endblock %}
+
+{% block body %}
+<section class="py-5 bg-body-tertiary">
+  <div class="container">
+
+    {# Titre + intro #}
+    <header class="mb-5 text-center">
+      <h1 class="h1 mb-3">Mentions légales</h1>
+      <p class="text-muted mb-0">
+        Informations relatives à l’éditeur du site, aux conditions d’utilisation et à l’hébergement.
+      </p>
+    </header>
+
+    <div class="row g-4">
+      {# Bloc 1 : Identité de l’éditeur #}
+      <div class="col-lg-6">
+        <div class="card h-100 shadow-sm">
+          <div class="card-header border-0 bg-transparent pb-0">
+            <h2 class="h5 mb-0">Éditeur du site</h2>
+          </div>
+          <div class="card-body pt-3">
+            <p class="mb-1 fw-semibold">Come Alive Fitness</p>
+            <p class="mb-3 text-muted">EURL au capital de 1 500 €</p>
+
+            <dl class="row mb-0 small">
+              <dt class="col-5 col-sm-4 text-muted">RCS</dt>
+              <dd class="col-7 col-sm-8">Versailles 918 247 818</dd>
+
+              <dt class="col-5 col-sm-4 text-muted">Code APE</dt>
+              <dd class="col-7 col-sm-8">8551Z</dd>
+
+              <dt class="col-5 col-sm-4 text-muted">N° TVA</dt>
+              <dd class="col-7 col-sm-8">FR 17 918 247 818</dd>
+
+              <dt class="col-5 col-sm-4 text-muted">Siège social</dt>
+              <dd class="col-7 col-sm-8">
+                52 rue du Général Leclerc<br>
+                78270 Gommecourt – France
+              </dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+
+      {# Bloc 2 : Conditions d’utilisation #}
+      <div class="col-lg-6">
+        <div class="card h-100 shadow-sm">
+          <div class="card-header border-0 bg-transparent pb-0">
+            <h2 class="h5 mb-0">Conditions d’utilisation</h2>
+          </div>
+          <div class="card-body pt-3 small text-muted">
+            <p>
+              Le site et chacun des éléments, y compris mais sans limitation les marques, les logos, icônes, infographies, photographies, 
+              qui le composent sont protégés au titre de la législation internationale de la propriété intellectuelle.
+            </p>
+            <p>
+              Les contenus figurant sur le site sont la propriété de Come Alive Fitness ou d’autres entreprises. Toute utilisation, reproduction ou représentation, 
+              par quelque procédé que ce soit, et sur quelque support que ce soit,
+               de tout ou partie du site et/ou des éléments qui le composent n’est pas autorisée sans le consentement expresse de Come Alive Fitness.
+            </p>
+            <p class="mb-0">
+              La marque <strong>Come Alive Fitness</strong> figurant sur le présent site internet
+              est une marque enregistrée, dont le titulaire est la société Come Alive Fitness.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {# Bloc 3 : Données personnelles #}
+      <div class="col-lg-6">
+        <div class="card h-100 shadow-sm">
+          <div class="card-header border-0 bg-transparent pb-0">
+            <h2 class="h5 mb-0">Données personnelles</h2>
+          </div>
+          <div class="card-body pt-3 small text-muted">
+            <p>
+              D’une façon générale, vous pouvez visiter notre site Internet sans avoir à décliner
+              votre identité ni à fournir d’informations personnelles vous concernant.
+            </p>
+            <p class="mb-0">
+              Cependant, nous pouvons parfois vous demander certaines données, par exemple pour
+              réserver une séance d’essai, conclure un abonnement ou nous contacter. Ces informations
+              sont utilisées uniquement pour la gestion de vos demandes et la bonne exécution de nos services.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {# Bloc 4 : Hébergeur #}
+      <div class="col-lg-6">
+        <div class="card h-100 shadow-sm">
+          <div class="card-header border-0 bg-transparent pb-0">
+            <h2 class="h5 mb-0">Hébergeur</h2>
+          </div>
+          <div class="card-body pt-3 small">
+            <p class="mb-1 fw-semibold">OVH Cloud</p>
+            <p class="mb-3 text-muted">Société d’hébergement du site</p>
+
+            <dl class="row mb-0 small text-muted">
+              <dt class="col-5 col-sm-4">RCS</dt>
+              <dd class="col-7 col-sm-8">Lille Métropole 424 761 419 00045</dd>
+
+              <dt class="col-5 col-sm-4">Code APE</dt>
+              <dd class="col-7 col-sm-8">2620Z</dd>
+
+              <dt class="col-5 col-sm-4">N° TVA</dt>
+              <dd class="col-7 col-sm-8">FR 22 424 761 419</dd>
+
+              <dt class="col-5 col-sm-4">Adresse</dt>
+              <dd class="col-7 col-sm-8">
+                2 rue Kellermann<br>
+                59100 Roubaix – France
+              </dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {# Petit rappel / lien RGPD éventuel #}
+    <div class="mt-5 text-center small text-muted">
+      Pour toute question concernant ces mentions légales ou vos données personnelles,
+      vous pouvez nous écrire à <a href="mailto:contact@comealivefitness.fr">contact@comealivefitness.fr</a>.
+    </div>
+  </div>
+</section>
+{% endblock %}
+

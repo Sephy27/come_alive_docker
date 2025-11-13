@@ -1,0 +1,223 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Protection des données personnelles{% endblock %}
+
+{% block body %}
+<section class="py-5 bg-body-tertiary">
+  <div class="container">
+
+    {# En-tête #}
+    <header class="mb-5 text-center">
+      <h1 class="section-title h1 mb-3">Protection des données personnelles</h1>
+      <p class="text-muted mb-0">
+        Cette politique de confidentialité décrit la manière dont <strong>Come Alive Fitness</strong> collecte,
+        utilise et protège vos données personnelles lorsque vous utilisez le site.
+      </p>
+    </header>
+
+    <div class="row g-4">
+      {# Sommaire latéral #}
+      <aside class="col-lg-3">
+        <div class="card h-100">
+          <div class="card-body">
+            <h2 class="h6 text-uppercase text-muted mb-3">Sommaire</h2>
+            <nav class="nav flex-column small gap-1">
+              <a class="nav-link px-0" href="#article-1">1. Préambule</a>
+              <a class="nav-link px-0" href="#article-2">2. Principes généraux</a>
+              <a class="nav-link px-0" href="#article-3">3. Données collectées</a>
+              <a class="nav-link px-0" href="#article-4">4. Responsable du traitement</a>
+              <a class="nav-link px-0" href="#article-5">5. Droits des utilisateurs</a>
+              <a class="nav-link px-0" href="#article-6">6. Modifications</a>
+              <a class="nav-link px-0" href="#article-7">7. Acceptation</a>
+            </nav>
+          </div>
+
+          <div class="card-footer bg-transparent small">
+            <i class="bi bi-file-earmark-pdf me-1"></i>
+            <a href="{{ asset('documents/politique_de_confidentialite.pdf') }}" target="_blank" rel="noopener">
+              Télécharger la politique de confidentialité (PDF)
+            </a>
+          </div>
+        </div>
+      </aside>
+
+      {# Contenu principal #}
+      <div class="col-lg-9">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body p-4 p-lg-5">
+
+            {# ARTICLE 1 #}
+            <section id="article-1" class="mb-5">
+              <h2 class="h4 mb-3">Article 1 – Préambule</h2>
+              <p>
+                La présente politique de confidentialité s’applique au site : <strong>Come Alive Fitness</strong>.
+              </p>
+              <p>
+                Elle a pour but d’exposer aux utilisateurs du site :
+              </p>
+              <ul>
+                <li>la manière dont sont collectées et traitées leurs données à caractère personnel ;</li>
+                <li>les droits dont ils disposent concernant ces données ;</li>
+                <li>l’identité du responsable de traitement ;</li>
+                <li>les destinataires des données ;</li>
+                <li>et, le cas échéant, la politique du site en matière de cookies.</li>
+              </ul>
+              <p>
+                La présente politique complète les mentions légales et les Conditions Générales d’Utilisation
+                disponibles à l’adresse suivante : <a href="https://www.comealivefitness.fr">www.comealivefitness.fr</a>.
+              </p>
+            </section>
+
+            {# ARTICLE 2 #}
+            <section id="article-2" class="mb-5">
+              <h2 class="h4 mb-3">Article 2 – Principes généraux en matière de collecte et de traitement</h2>
+              <p>
+                Conformément à l’article 5 du Règlement (UE) 2016/679 (RGPD), la collecte et le traitement
+                des données personnelles respectent les principes suivants :
+              </p>
+              <ul>
+                <li><strong>Licéité, loyauté et transparence</strong> : les données sont collectées avec le consentement de l’utilisateur et celui-ci est informé de l’utilisation qui en est faite.</li>
+                <li><strong>Finalités limitées</strong> : les données sont collectées pour des objectifs déterminés dans la présente politique.</li>
+                <li><strong>Minimisation</strong> : seules les données strictement nécessaires sont collectées.</li>
+                <li><strong>Conservation limitée</strong> : les données sont conservées pour une durée limitée, communiquée à l’utilisateur.</li>
+                <li><strong>Intégrité et confidentialité</strong> : le responsable du traitement s’engage à garantir la sécurité des données.</li>
+              </ul>
+              <p>
+                Le traitement n’est licite que s’il repose sur l’une des bases légales prévues à l’article 6 du RGPD
+                (consentement, exécution d’un contrat, obligation légale, sauvegarde des intérêts vitaux,
+                mission d’intérêt public ou intérêts légitimes poursuivis par le responsable de traitement).
+              </p>
+            </section>
+
+            {# ARTICLE 3 #}
+            <section id="article-3" class="mb-5">
+              <h2 class="h4 mb-3">Article 3 – Données collectées et traitées</h2>
+
+              <h3 class="h6">A. Données collectées et mode de collecte</h3>
+              <p>
+                Les données personnelles susceptibles d’être collectées sur le site Come Alive Fitness sont
+                notamment : nom, prénom, date de naissance, adresse postale, téléphone, adresse e-mail,
+                coordonnées bancaires (RIB).
+              </p>
+              <p>
+                Ces données sont collectées lorsque l’utilisateur :
+              </p>
+              <ul>
+                <li>remplit le formulaire de contact,</li>
+                <li>réserve une séance d’essai,</li>
+                <li>souscrit à un abonnement.</li>
+              </ul>
+              <p>
+                Les données sont conservées pour une durée maximale de <strong>5 ans</strong>, afin de permettre
+                la gestion des demandes de contact, des séances d’essai et des abonnements.
+              </p>
+
+              <h3 class="h6 mt-4">B. Transmission des données à des tiers</h3>
+              <p>
+                Les données personnelles collectées ne sont pas transmises à des tiers et sont utilisées
+                exclusivement par l’éditeur du site.
+              </p>
+
+              <h3 class="h6 mt-4">C. Hébergement des données</h3>
+              <p>
+                Le site Come Alive Fitness est hébergé par <strong>OVH</strong>, 2 rue Kellermann – 59100 Roubaix, France.
+                Les données collectées sont hébergées et traitées exclusivement en France.
+              </p>
+            </section>
+
+            {# ARTICLE 4 #}
+            <section id="article-4" class="mb-5">
+              <h2 class="h4 mb-3">Article 4 – Responsable du traitement</h2>
+
+              <h3 class="h6">A. Identité du responsable</h3>
+              <p>
+                Le responsable du traitement des données personnelles est :
+                <strong>Patrick MILA</strong>, pour la société Come Alive Fitness.
+              </p>
+              <p>
+                Contact : <a href="mailto:contact@comealivefitness.fr">contact@comealivefitness.fr</a>.
+              </p>
+
+              <h3 class="h6 mt-4">B. Engagements du responsable</h3>
+              <p>
+                Le responsable du traitement s’engage à :
+              </p>
+              <ul>
+                <li>protéger les données collectées ;</li>
+                <li>ne pas les transmettre à des tiers sans en informer l’utilisateur ;</li>
+                <li>respecter les finalités pour lesquelles les données ont été collectées ;</li>
+                <li>mettre en place des mesures de sécurité adaptées (certificat SSL, etc.) ;</li>
+                <li>informer l’utilisateur en cas de modification, suppression ou violation de ses données.</li>
+              </ul>
+            </section>
+
+            {# ARTICLE 5 #}
+            <section id="article-5" class="mb-5">
+              <h2 class="h4 mb-3">Article 5 – Droits des utilisateurs</h2>
+              <p>
+                Conformément à la réglementation en vigueur, chaque utilisateur dispose des droits suivants
+                sur ses données personnelles :
+              </p>
+              <ul>
+                <li><strong>Droit d’accès</strong> (obtenir la copie de ses données) ;</li>
+                <li><strong>Droit de rectification</strong> ;</li>
+                <li><strong>Droit à l’effacement</strong> (droit à l’oubli) ;</li>
+                <li><strong>Droit à la portabilité</strong> ;</li>
+                <li><strong>Droit à la limitation du traitement</strong> ;</li>
+                <li><strong>Droit d’opposition</strong> au traitement ;</li>
+                <li><strong>Droit de définir le sort de ses données après son décès</strong>.</li>
+              </ul>
+              <p>
+                Pour exercer ces droits, l’utilisateur peut envoyer un e-mail à
+                <a href="mailto:contact@comealivefitness.fr">contact@comealivefitness.fr</a> en précisant son nom,
+                son prénom et l’objet de sa demande. Une réponse lui sera apportée dans un délai maximum
+                de 30 jours.
+              </p>
+
+              <h3 class="h6 mt-4">Données des personnes mineures</h3>
+              <p>
+                Seuls les mineurs de 15 ans ou plus peuvent consentir seuls au traitement de leurs données.
+                Pour les mineurs de moins de 15 ans, le consentement d’un représentant légal est requis.
+              </p>
+              <p>
+                En cas de désaccord ou de difficulté persistante, l’utilisateur peut saisir la
+                <a href="https://www.cnil.fr" target="_blank" rel="noopener">CNIL</a> ou toute autorité de contrôle compétente.
+              </p>
+            </section>
+
+            {# ARTICLE 6 #}
+            <section id="article-6" class="mb-5">
+              <h2 class="h4 mb-3">Article 6 – Modifications de la politique</h2>
+              <p>
+                La présente politique de confidentialité peut être modifiée à tout moment afin de rester
+                conforme au droit en vigueur.
+              </p>
+              <p>
+                La version à jour est en permanence accessible à l’adresse :
+                <a href="https://comealivefitness.fr/index.php/protection-des-donnees/">
+                  https://comealivefitness.fr/index.php/protection-des-donnees/
+                </a>.
+              </p>
+              <p>
+                Dernière mise à jour : <strong>23/01/2023</strong>.
+              </p>
+            </section>
+
+            {# ARTICLE 7 #}
+            <section id="article-7">
+              <h2 class="h4 mb-3">Article 7 – Acceptation de la politique de confidentialité</h2>
+              <p>
+                En naviguant sur le site, l’utilisateur reconnaît avoir pris connaissance de la présente
+                politique de confidentialité et en accepter pleinement les termes, notamment en ce qui
+                concerne la collecte et le traitement de ses données personnelles.
+              </p>
+            </section>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+

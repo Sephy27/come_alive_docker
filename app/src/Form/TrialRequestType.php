@@ -17,10 +17,26 @@ class TrialRequestType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('firstName', T\TextType::class, ['label' => 'Prénom'])
-            ->add('lastName',  T\TextType::class, ['label' => 'Nom'])
-            ->add('email',     T\EmailType::class, ['label' => 'Email'])
-            ->add('phone',     T\TelType::class,   ['label' => 'Téléphone'])
+            ->add('firstName', T\TextType::class, [
+                'label' => 'Prénom',
+                'required' => true,
+                'constraints' => [new NotBlank(['message' => 'Ce champ est requis.'])]
+            ])
+            ->add('lastName',  T\TextType::class, [
+                'label' => 'Nom',
+                'required' => true,
+                'constraints' => [new NotBlank(['message' => 'Ce champ est requis.'])]
+            ])
+            ->add('email',     T\EmailType::class, [
+                'label' => 'Email',
+                'required' => true,
+                'constraints' => [new NotBlank(['message' => 'Ce champ est requis.'])]
+            ])
+            ->add('phone',     T\TelType::class, [
+                'label' => 'Téléphone',
+                'required' => true,
+                'constraints' => [new NotBlank(['message' => 'Ce champ est requis.'])]
+            ])
             ->add('goal', T\ChoiceType::class, [
                 'label'       => 'Objectif principal',
                 'placeholder' => 'Choisir…',
@@ -37,20 +53,29 @@ class TrialRequestType extends AbstractType
                 'label'       => 'Date souhaitée',
                 'widget'      => 'single_text',
                 'html5'       => true,
-                'constraints' => [new NotBlank()],
+                'required' => true,
+                'constraints' => [
+                    new NotBlank(['message' => 'Merci de choisir une date.']),
+                ],
                 'attr'        => [
                     'autocomplete' => 'off',
                     'class'        => 'js-trial-date',
                 ],
             ])
             
-            // Champ caché mappé (JSON du créneau)
+            // Champ caché mappé (JSON du créneau), validé par Symfony
             ->add('trialSlot', HiddenType::class, [
                 'required' => true,
+                'attr' => [
+                                'class' => 'js-trial-slot-hidden'
+                            ]
             ])
             ->add('message', T\TextareaType::class, [
-                'label'    => 'Message (facultatif)',
-                'required' => false,
+                'label'    => 'Message',
+                'required' => true,
+                'constraints' => [
+                    new NotBlank(['message' => "Merci d'écrire un message."]),
+                ],
                 'attr'     => ['rows' => 4],
             ])
             ->add('send', T\SubmitType::class, [

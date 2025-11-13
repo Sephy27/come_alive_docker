@@ -2,313 +2,364 @@
 {% extends 'base.html.twig' %}
 {% block title %}Séance d’essai — Come Alive Fitness{% endblock %}
 
-{% block stylesheets %}
-  {{ parent() }}
-  
-{% endblock %}
-
 {% block body %}
 
-  <!-- HERO -->
-  <header class="hero-try">
-    <div class="container reveal reveal-up">
-      <h1>Votre séance d’essai, offerte sur rendez-vous</h1>
-      <p>Découvrez la salle, l’ambiance et nos coachs : testez, ressentez, validez.</p>
-      <div class="mt-4 d-flex justify-content-center gap-2">
-        <a href="#reserver" class="btn btn-primary btn-lg"><i class="bi bi-calendar2-check me-2"></i>Réserver ma séance</a>
-        <a href="#comment" class="btn btn-outline-light btn-lg">Comment ça se passe ?</a>
-      </div>
+<header class="hero-try">
+  <div class="container reveal reveal-up">
+    <h1>Votre séance d’essai, offerte sur rendez-vous</h1>
+    <p>Découvrez la salle, l’ambiance et nos coachs : testez, ressentez, validez.</p>
+    <div class="mt-4 d-flex justify-content-center gap-2">
+      <a href="#reserver" class="btn btn-primary btn-lg"><i class="bi bi-calendar2-check me-2"></i>Réserver ma séance</a>
+      <a href="#comment" class="btn btn-outline-light btn-lg">Comment ça se passe ?</a>
     </div>
-  </header>
+  </div>
+</header>
 
-  <!-- INTRO -->
-  <section class="py-5">
-    <div class="container">
-      <div class="row g-4 align-items-center reveal-stagger">
-        <div class="col-lg-6">
-          <h2 class="h1 mb-3 reveal reveal-up">Envie d’essayer avant de vous lancer ?</h2>
-          <p class="text-muted">
-            Come Alive Fitness vous offre une **séance d’essai sur rendez-vous** pour découvrir le centre, l’ambiance et les coachs.
-          </p>
-          <div class="d-flex flex-wrap gap-2 mt-3">
-            <span class="badge text-bg-primary">Encadrement coaché</span>
-            <span class="badge text-bg-success">Ambiance conviviale</span>
-            <span class="badge text-bg-dark">Équipement pro</span>
-          </div>
+<section class="py-5">
+  <div class="container">
+    <div class="row g-4 align-items-center reveal-stagger">
+
+      <div class="col-lg-6">
+        <h2 class="h1 mb-3 reveal reveal-up">Envie d’essayer avant de vous lancer ?</h2>
+        <p class="text-muted">
+          Come Alive Fitness vous offre une **séance d’essai sur rendez-vous** pour découvrir le centre, l’ambiance et les coachs.
+        </p>
+        <div class="d-flex flex-wrap gap-2 mt-3">
+          <span class="badge text-bg-primary">Encadrement coaché</span>
+          <span class="badge text-bg-success">Ambiance conviviale</span>
+          <span class="badge text-bg-dark">Équipement pro</span>
         </div>
-        <div class="col-lg-6">
-          <div class="card card-hover">
-            <div class="card-body d-flex align-items-center gap-3">
-              <i class="bi bi-gift fs-2 text-primary"></i>
-              <div>
-                <div class="fw-bold">Séance d’essai offerte</div>
-                <div class="text-muted small">Sur rendez-vous · dans la limite des places disponibles</div>
-              </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="card card-hover">
+          <div class="card-body d-flex align-items-center gap-3">
+            <i class="bi bi-gift fs-2 text-primary"></i>
+            <div>
+              <div class="fw-bold">Séance d’essai offerte</div>
+              <div class="text-muted small">Sur rendez-vous · dans la limite des places disponibles</div>
             </div>
-            <div class="card-footer bg-transparent text-end">
-              <a href="#reserver" class="btn btn-outline-primary btn-sm">Je réserve maintenant</a>
-            </div>
+          </div>
+          <div class="card-footer bg-transparent text-end">
+            <a href="#reserver" class="btn btn-outline-primary btn-sm">Je réserve maintenant</a>
           </div>
         </div>
       </div>
+
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- COMMENT ÇA SE PASSE -->
-  <section id="comment" class="py-5 bg-body-tertiary">
-    <div class="container">
-      <h2 class="h1 text-center mb-5 reveal reveal-up">Comment se présente une séance d’essai ?</h2>
+<section id="comment" class="py-5 bg-body-tertiary">
+  <div class="container">
 
-      <div class="row g-5 reveal-stagger">
-        <div class="col-lg-6">
-          <div class="timeline vstack gap-4">
-            <!-- Step 1 -->
-            <div class="timeline-item">
-              <div class="timeline-bullet"></div>
-              <h3 class="h5 d-flex align-items-center gap-2 mb-1"><i class="bi bi-clock-history text-primary"></i> 20 minutes avant</h3>
-              <p class="text-muted mb-0">Arrivez un peu en avance pour **remplir le formulaire d’accueil**, visiter les lieux et vous changer.</p>
-            </div>
-            <!-- Step 2 -->
-            <div class="timeline-item">
-              <div class="timeline-bullet"></div>
-              <h3 class="h5 d-flex align-items-center gap-2 mb-1"><i class="bi bi-activity text-danger"></i> Pendant la séance</h3>
-              <p class="text-muted mb-0">Participez au cours de votre choix **avec un coach** qui adaptera l’intensité selon votre niveau.</p>
-            </div>
-            <!-- Step 3 -->
-            <div class="timeline-item">
-              <div class="timeline-bullet"></div>
-              <h3 class="h5 d-flex align-items-center gap-2 mb-1"><i class="bi bi-chat-dots text-success"></i> Débrief</h3>
-              <p class="text-muted mb-0">Repassez à l’accueil pour un **retour d’expérience** et obtenir des recommandations personnalisées.</p>
+    <h2 class="h1 text-center mb-5 reveal reveal-up">Comment se présente une séance d’essai ?</h2>
+
+    <div class="row g-5 reveal-stagger">
+
+      <div class="col-lg-6">
+        <div class="timeline vstack gap-4">
+
+          <div class="timeline-item">
+            <div class="timeline-bullet"></div>
+            <h3 class="h5 d-flex align-items-center gap-2 mb-1"><i class="bi bi-clock-history text-primary"></i> 20 minutes avant</h3>
+            <p class="text-muted mb-0">Arrivez un peu en avance pour **remplir le formulaire d’accueil**, visiter les lieux et vous changer.</p>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-bullet"></div>
+            <h3 class="h5 d-flex align-items-center gap-2 mb-1"><i class="bi bi-activity text-danger"></i> Pendant la séance</h3>
+            <p class="text-muted mb-0">Participez au cours de votre choix **avec un coach** qui adaptera l’intensité selon votre niveau.</p>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-bullet"></div>
+            <h3 class="h5 d-flex align-items-center gap-2 mb-1"><i class="bi bi-chat-dots text-success"></i> Débrief</h3>
+            <p class="text-muted mb-0">Repassez à l’accueil pour un **retour d’expérience** et obtenir des recommandations personnalisées.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="card h-100 card-hover reveal">
+          <div class="card-body">
+            <h3 class="h5 mb-3">De quoi avez-vous besoin ?</h3>
+            <div class="vstack gap-2">
+              <div class="check-item"><i class="bi bi-check-circle-fill"></i><span>Bouteille d’eau</span></div>
+              <div class="check-item"><i class="bi bi-check-circle-fill"></i><span>Tenue adaptée</span></div>
+              <div class="check-item"><i class="bi bi-check-circle-fill"></i><span>Chaussures de sport</span></div>
+              <div class="check-item"><i class="bi bi-check-circle-fill"></i><span>Serviette</span></div>
+              <div class="check-item"><i class="bi bi-check-circle-fill"></i><span>Et votre curiosité !</span></div>
             </div>
           </div>
-        </div>
-
-        <!-- Checklist -->
-        <div class="col-lg-6">
-          <div class="card h-100 card-hover reveal">
-            <div class="card-body">
-              <h3 class="h5 mb-3">De quoi avez-vous besoin ?</h3>
-              <div class="vstack gap-2">
-                <div class="check-item"><i class="bi bi-check-circle-fill"></i><span>Une **bouteille d’eau**</span></div>
-                <div class="check-item"><i class="bi bi-check-circle-fill"></i><span>Une **tenue adaptée** à la pratique sportive</span></div>
-                <div class="check-item"><i class="bi bi-check-circle-fill"></i><span>Une **paire de chaussures de sport**</span></div>
-                <div class="check-item"><i class="bi bi-check-circle-fill"></i><span>Une **serviette**</span></div>
-                <div class="check-item"><i class="bi bi-check-circle-fill"></i><span>Et surtout, **votre curiosité** !</span></div>
-              </div>
-            </div>
-            <div class="card-footer bg-transparent">
-              <small class="text-muted">Besoin d’un conseil matériel ? Écrivez-nous, on vous guide.</small>
-            </div>
+          <div class="card-footer bg-transparent">
+            <small class="text-muted">Besoin d’un conseil matériel ? Écrivez-nous.</small>
           </div>
         </div>
       </div>
 
-      <div class="text-center mt-5">
-        <a href="#reserver" class="btn btn-primary btn-lg"><i class="bi bi-calendar-event me-2"></i>Réserver ma séance d’essai</a>
-      </div>
     </div>
-  </section>
 
-  <!-- FORMULAIRE -->
-  <section id="reserver" class="py-5">
-    <div class="container">
-      <h2 class="h1 text-center mb-2 reveal reveal-up">Réservez votre séance</h2>
-      <p class="text-center text-muted mb-5">Choisissez un créneau, dites-nous votre objectif, on s’occupe du reste.</p>
+    <div class="text-center mt-5">
+      <a href="#reserver" class="btn btn-primary btn-lg"><i class="bi bi-calendar-event me-2"></i>Réserver</a>
+    </div>
 
-      {{ form_start(form, { attr: { id: 'reserver', class: 'row g-3 g-lg-4' } }) }}
-        <div class="col-md-6">{{ form_row(form.firstName) }}</div>
-        <div class="col-md-6">{{ form_row(form.lastName) }}</div>
-        <div class="col-md-6">{{ form_row(form.email) }}</div>
-        <div class="col-md-6">{{ form_row(form.phone) }}</div>
-        <div class="col-md-6">{{ form_row(form.goal) }}</div>
-        <div class="col-md-4">{{ form_row(form.trialDate) }}</div>
-        <div class="mb-3 col-md-8">
-          <label class="form-label">Créneau disponible</label>
-          <select class="form-select js-trial-slot">
+  </div>
+</section>
+
+<section id="reserver" class="py-5">
+  <div class="container">
+
+    <h2 class="h1 text-center mb-2 reveal reveal-up">Réservez votre séance</h2>
+    <p class="text-center text-muted mb-5">Choisissez un créneau, dites-nous votre objectif, on s’occupe du reste.</p>
+
+    {# Bandeau pré-sélection #}
+    {% set preTitle = app.request.query.get('title') %}
+    {% set preStart = app.request.query.get('start') %}
+    {% set preEnd   = app.request.query.get('end') %}
+    {% set preDay   = app.request.query.get('day') %}
+
+    {% if preTitle and preStart and preEnd %}
+      {% set dayLabels = {
+        'mon': 'lundi',
+        'tue': 'mardi',
+        'wed': 'mercredi',
+        'thu': 'jeudi',
+        'fri': 'vendredi',
+        'sat': 'samedi',
+        'sun': 'dimanche'
+      } %}
+
+      <div class="alert alert-info d-flex align-items-start gap-3 mb-4">
+        <i class="bi bi-info-circle-fill fs-4"></i>
+        <div>
+          <strong>Séance pré-sélectionnée :</strong><br>
+          {{ preTitle }}<br>
+          {{ dayLabels[preDay] ?? '' }} • {{ preStart }} – {{ preEnd }}<br>
+          <small class="text-muted">Vous pouvez modifier la date ou le créneau si besoin.</small>
+        </div>
+      </div>
+    {% endif %}
+
+    {{ form_start(form, { attr: { class: 'row g-3 g-lg-4', 'data-turbo': 'false' } }) }}
+
+      <div class="col-md-6">{{ form_row(form.firstName) }}</div>
+      <div class="col-md-6">{{ form_row(form.lastName) }}</div>
+      <div class="col-md-6">{{ form_row(form.email) }}</div>
+      <div class="col-md-6">{{ form_row(form.phone) }}</div>
+
+      <div class="col-md-6">{{ form_row(form.goal) }}</div>
+
+      <div class="col-md-4">{{ form_row(form.trialDate) }}</div>
+
+      <div class="col-md-8">
+        <div class="mb-3">
+          <label for="trial-slot-select" class="form-label">Créneau disponible</label>
+          <select id="trial-slot-select" class="form-select js-trial-slot">
             <option value="">Choisissez d’abord une date</option>
           </select>
-          <div class="form-text">Les créneaux proposés dépendent du jour choisi.</div>
-        </div>
 
-        {# garde le champ caché mappé (en dehors de la grille si tu veux) #}
-        {{ form_widget(form.trialSlot) }}
-        
-        <div class="col-12">{{ form_row(form.message) }}</div>
-        <div class="col-12 d-flex gap-2 align-items-center">
-          {{ form_widget(form.send) }}
-          <small class="text-muted">Nous vous recontactons pour confirmer le créneau.</small>
-        </div>
-        {{ form_errors(form) }}
-        {{ form_errors(form.trialDate) }}
-        {{ form_errors(form.trialSlot) }}
+          {# Champ caché mappé Symfony (JSON du créneau) #}
+          {{ form_widget(form.trialSlot) }}
 
-      {{ form_end(form) }}
-      {# JSON pur, lisible côté JS #}
-      <script id="week-events" type="application/json">
-        {{ events|json_encode(constant('JSON_UNESCAPED_UNICODE'))|raw }}
-      </script>
-
-
-    </div>
-    <script>
-      (function(){
-        // 1) Récupère le JSON sans que le parseur JS voie du Twig
-        const el = document.getElementById('week-events');
-        let WEEK_EVENTS = [];
-        try { WEEK_EVENTS = JSON.parse(el?.textContent || '[]'); }
-        catch(e){ console.error('Invalid WEEK_EVENTS JSON', e); WEEK_EVENTS = []; }
-
-        // 2) Sélecteurs des champs (assure-toi que ces classes sont bien posées dans TrialRequestType)
-        const inputDate  = document.querySelector('.js-trial-date');
-        const selectSlot = document.querySelector('.js-trial-slot');
-        if (!inputDate || !selectSlot) return;
-
-        // 3) Conversions jour
-        // Date.getDay(): 0=dim,1=lun,... => on ramène à nos clés planning
-        const JS2KEY = ['sun','mon','tue','wed','thu','fri','sat'];
-
-        function dayKeyFromISO(iso){
-          if(!iso) return null;
-          // T12:00:00 pour éviter les surprises de fuseau (minuit)
-          const d = new Date(iso + 'T12:00:00');
-          if (isNaN(d)) return null;
-          return JS2KEY[d.getDay()];
-        }
-
-        // 4) Remplissage de la liste
-        function setOptions(items){
-          selectSlot.innerHTML = '';
-          if (!items.length){
-            const opt = new Option('Aucun créneau ce jour-là', '', true, true);
-            opt.disabled = true;
-            selectSlot.add(opt);
-            return;
-          }
-          selectSlot.add(new Option('Choisissez un créneau…', ''));
-          items.forEach(({label, value}) => {
-            selectSlot.add(new Option(label, value));
-          });
-        }
-
-        function onDateChange(){
-          const key = dayKeyFromISO(inputDate.value);   // ex: 'mon'
-          if(!key){ setOptions([]); return; }
-
-          // Filtre les events du jour, triés par heure
-          const slots = WEEK_EVENTS
-            .filter(ev => ev.day === key)
-            .sort((a,b) => a.start.localeCompare(b.start))
-            .map(ev => ({
-              label: `${ev.start} – ${ev.end} • ${ev.title}`,
-              value: JSON.stringify({
-                day: key,
-                start: ev.start,
-                end: ev.end,
-                title: ev.title,
-                type: ev.type || null
-              })
-            }));
-
-          setOptions(slots);
-        }
-
-        // 5) Boot + écoute
-        onDateChange();                 // pré-remplir si la date a déjà une valeur
-        inputDate.addEventListener('change', onDateChange);
-
-        // (facultatif) debug rapide :
-        // console.log('WEEK_EVENTS:', WEEK_EVENTS.length, WEEK_EVENTS);
-      })();
-      (function(){
-        const form       = document.querySelector('form'); // ou #reserver si tu as mis l'id
-        const selectSlot = document.querySelector('.js-trial-slot');
-        const hiddenSlot = document.querySelector('input[name$="[trialSlot]"]');
-
-        if (!form || !selectSlot || !hiddenSlot) return;
-
-        // au cas où : copie à chaque sélection (tu le fais déjà, mais on bétonne)
-        selectSlot.addEventListener('change', () => {
-          hiddenSlot.value = selectSlot.value || '';
-        });
-
-        // juste avant submit : si pas de créneau → on empêche et on affiche un message
-        form.addEventListener('submit', (e) => {
-          if (!hiddenSlot.value) {
-            e.preventDefault();
-            // feedback visuel simple
-            selectSlot.classList.add('is-invalid');
-            if (!selectSlot.nextElementSibling || !selectSlot.nextElementSibling.classList.contains('invalid-feedback')) {
-              const fb = document.createElement('div');
-              fb.className = 'invalid-feedback';
-              fb.textContent = 'Veuillez choisir un créneau.';
-              selectSlot.after(fb);
-            }
-            selectSlot.focus();
-          }
-        });
-      })();
-    </script>
-
-    
-
-  </section>
-
-  <!-- FAQ -->
-  <section class="py-5 bg-body-tertiary">
-    <div class="container">
-      <h2 class="h1 text-center mb-4 reveal reveal-up">Questions fréquentes</h2>
-      <div class="row justify-content-center">
-        <div class="col-lg-8">
-          <div class="accordion" id="faq">
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="q1">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#a1" aria-expanded="true" aria-controls="a1">
-                  Puis-je venir avec un(e) ami(e) ?
-                </button>
-              </h2>
-              <div id="a1" class="accordion-collapse collapse show" aria-labelledby="q1" data-bs-parent="#faq">
-                <div class="accordion-body">
-                  Bien sûr ! Précisez-le dans le formulaire, nous essaierons de vous placer sur le même créneau.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="q2">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a2" aria-expanded="false" aria-controls="a2">
-                  J’ai un niveau débutant, est-ce adapté ?
-                </button>
-              </h2>
-              <div id="a2" class="accordion-collapse collapse" aria-labelledby="q2" data-bs-parent="#faq">
-                <div class="accordion-body">
-                  Oui. Le coach adapte l’intensité et les exercices. Notre priorité : vous faire progresser en sécurité et avec le sourire.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="q3">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a3" aria-expanded="false" aria-controls="a3">
-                  Quels sont les horaires disponibles ?
-                </button>
-              </h2>
-              <div id="a3" class="accordion-collapse collapse" aria-labelledby="q3" data-bs-parent="#faq">
-                <div class="accordion-body">
-                  Les créneaux varient selon les cours. Indiquez vos disponibilités dans le message et nous vous proposerons des options.
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="text-center mt-4">
-            <a href="#reserver" class="btn btn-outline-primary"><i class="bi bi-calendar-plus me-2"></i>Je réserve ma séance d’essai</a>
+          {# Erreurs back-end sur trialSlot #}
+          <div id="slot-error" class="invalid-feedback d-block">
+            {{ form_errors(form.trialSlot) }}
           </div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- CTA sticky mobile -->
-  <div class="d-sm-none cta-sticky">
-    <a href="#reserver"><i class="bi bi-lightning-charge-fill me-1"></i> Réserver ma séance d’essai</a>
+      <div class="col-12">{{ form_row(form.message) }}</div>
+
+      <div class="col-12">
+        <div class="alert alert-warning d-flex align-items-center gap-2 mb-2">
+          <i class="bi bi-bell-fill text-warning"></i>
+          <span><strong>Nous vous recontacterons pour confirmer le créneau sélectionné.</strong></span>
+        </div>
+      </div>
+
+      <div class="col-12 d-flex gap-2 align-items-center">
+        {{ form_widget(form.send) }}
+      </div>
+
+      <div class="text-danger">
+          {{ form_errors(form) }}
+      </div>
+
+    {{ form_end(form) }}
+
+    {# données du planning #}
+    <script id="week-events" type="application/json">
+      {{ events|json_encode(constant('JSON_UNESCAPED_UNICODE'))|raw }}
+    </script>
+
+    <script>
+(function(){
+
+  // récupération JSON des événements
+  const el = document.getElementById('week-events');
+  let WEEK_EVENTS = [];
+  try { WEEK_EVENTS = JSON.parse(el?.textContent || '[]'); }
+  catch(e){ console.error('Invalid WEEK_EVENTS JSON', e); WEEK_EVENTS = []; }
+
+  const inputDate   = document.querySelector('.js-trial-date');
+  const selectSlot  = document.querySelector('.js-trial-slot');
+  const hiddenSlot  = document.getElementById('trial_request_trialSlot');
+  const slotError   = document.getElementById('slot-error');
+  const formEl      = document.querySelector('form[name="trial_request"]');
+
+  if (!inputDate || !selectSlot || !hiddenSlot || !formEl) return;
+
+  const JS2KEY = ['sun','mon','tue','wed','thu','fri','sat'];
+  const KEY2JS = { sun:0, mon:1, tue:2, wed:3, thu:4, fri:5, sat:6 };
+
+  function dayKeyFromISO(iso){
+    if (!iso) return null;
+    const [y,m,d] = iso.split('-').map(Number);
+    const date = new Date(y, m-1, d);
+    if (isNaN(date)) return null;
+    return JS2KEY[date.getDay()];
+  }
+
+  // 🔁 Prochain jour STRICTEMENT FUTUR (si on est jeudi et qu’on choisit "thu" → jeudi prochain)
+  function nextDateForDayKey(dayKey){
+    const target = KEY2JS[dayKey];
+    if (target === undefined) return null;
+
+    const today = new Date();
+    const d = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    const cur = d.getDay();
+
+    let diff = target - cur;
+    if (diff <= 0) diff += 7;   // <= 0 -> toujours la semaine SUIVANTE
+
+    d.setDate(d.getDate() + diff);
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2,'0');
+    const day = String(d.getDate()).padStart(2,'0');
+    return `${y}-${m}-${day}`;
+  }
+
+  function norm(s){
+    return (s || '')
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g,'')
+      .toUpperCase()
+      .replace(/[^A-Z0-9]/g,'');
+  }
+
+  function setOptions(items){
+    selectSlot.innerHTML = '';
+    selectSlot.classList.remove('is-invalid');
+    if (slotError) slotError.textContent = '';
+
+    if (!items.length){
+      const opt = new Option('Aucun créneau ce jour-là', '', true, true);
+      opt.disabled = true;
+      selectSlot.add(opt);
+      hiddenSlot.value = '';
+      return;
+    }
+
+    selectSlot.add(new Option('Choisissez un créneau…',''));
+    items.forEach(it => selectSlot.add(new Option(it.label, it.value)));
+    hiddenSlot.value = '';
+  }
+
+  // paramètres URL (planning)
+  const params    = new URLSearchParams(window.location.search);
+  const preTitle  = params.get('title');
+  const preStart  = params.get('start');
+  const preEnd    = params.get('end');
+  const preDayKey = params.get('day');
+
+  let autoApplied = false;
+
+  function onDateChange(){
+    const iso = inputDate.value;
+    const key = dayKeyFromISO(iso);
+    if (!key){ setOptions([]); return; }
+
+    const slots = WEEK_EVENTS
+      .filter(ev => ev.day === key)
+      .sort((a,b)=> a.start.localeCompare(b.start))
+      .map(ev => ({
+        label: `${ev.start} – ${ev.end} • ${ev.title}`,
+        value: JSON.stringify({
+          day:   key,
+          start: ev.start,
+          end:   ev.end,
+          title: ev.title,
+          type:  ev.type || null
+        })
+      }));
+
+    setOptions(slots);
+
+    // pré-sélection automatique seulement une fois
+    if (!autoApplied && (preTitle || preStart)){
+      const wantedTitle = norm(preTitle);
+      const wantedStart = preStart;
+
+      const options = Array.from(selectSlot.options).slice(1);
+      let index = -1;
+
+      options.forEach((o,i)=>{
+        try{
+          const v = JSON.parse(o.value);
+          const matchStart = wantedStart && v.start === wantedStart;
+          const matchTitle = wantedTitle && norm(v.title).includes(wantedTitle);
+
+          if (matchStart && matchTitle && index === -1){
+            index = i+1;
+          }
+        }catch(e){}
+      });
+
+      if (index > 0){
+        selectSlot.selectedIndex = index;
+        hiddenSlot.value = selectSlot.value;
+        autoApplied = true;
+      }
+    }
+  }
+
+  // 🔹 ICI : on force la date si on vient du planning, même si une valeur existe déjà
+  if (preDayKey){
+    const iso = nextDateForDayKey(preDayKey);
+    if (iso) {
+      inputDate.value = iso;
+    }
+  }
+
+  // init slots
+  if (inputDate.value){
+    onDateChange();
+  }
+
+  inputDate.addEventListener('change', onDateChange);
+
+  selectSlot.addEventListener('change', ()=>{
+    hiddenSlot.value = selectSlot.value || '';
+    if (hiddenSlot.value){
+      selectSlot.classList.remove('is-invalid');
+      if (slotError) slotError.textContent = '';
+    }
+  });
+
+  // synchro finale avant soumission
+  formEl.addEventListener('submit', ()=>{
+    if (selectSlot.value && !hiddenSlot.value){
+      hiddenSlot.value = selectSlot.value;
+    }
+  });
+
+})();
+    </script>
+
+
   </div>
+</section>
 
 {% endblock %}
-

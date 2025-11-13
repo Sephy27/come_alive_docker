@@ -30,16 +30,27 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('footer-contact');
   if (!form) return;
 
-  const btn   = document.getElementById('footer-contact-submit');
-  const toastOkEl    = document.getElementById('contactToast');
-  const toastErrEl   = document.getElementById('contactToastError');
-  const toastOkMsg   = document.getElementById('contactToastMessage');
-  const toastErrMsg  = document.getElementById('contactToastErrorMessage');
+  const btn         = document.getElementById('footer-contact-submit');
+  const toastOkEl   = document.getElementById('contactToast');
+  const toastErrEl  = document.getElementById('contactToastError');
+  const toastOkMsg  = document.getElementById('contactToastMessage');
+  const toastErrMsg = document.getElementById('contactToastErrorMessage');
 
   const Toast = window.bootstrap?.Toast;
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
+
+    // 🔹 Vérif front : message obligatoire
+    const messageField = form.querySelector('textarea[name="message"]');
+    if (messageField && !messageField.value.trim()) {
+      if (Toast && toastErrEl) {
+        toastErrMsg.textContent = 'Merci de préciser votre message avant d’envoyer.';
+        new Toast(toastErrEl, { delay: 4000 }).show();
+      }
+      messageField.focus();
+      return;
+    }
 
     btn.disabled = true;
     btn.innerHTML = 'Envoi…';
@@ -57,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
         throw new Error(data.message || 'Erreur lors de l’envoi');
       }
 
-      // Succès
+      // ✅ Succès
       if (Toast && toastOkEl) {
         toastOkMsg.textContent = data.message || 'Message envoyé ✔️';
         new Toast(toastOkEl, { delay: 3500 }).show();
@@ -75,6 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
 
 // -------- Planning : modale cours --------
 (function () {
@@ -244,6 +256,12 @@ document.addEventListener('DOMContentLoaded', () => {
       url.searchParams.set('title', meta.titre);
       if (start) url.searchParams.set('start', start);
       if (end)   url.searchParams.set('end', end);
+      
+       // On passe aussi le jour (mon, tue, …) pour cibler le bon jour de la semaine
+      url.searchParams.set('day', dayKey);
+      //anchor + scroll auto vers le formulaire pré rempli
+      url.hash = 'reserver';
+
       $cta.href = url.toString();
 
       const modal = bootstrap.Modal.getOrCreateInstance($modal);

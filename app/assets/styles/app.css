@@ -12,6 +12,7 @@ html, body {
     margin: 0;
     padding: 0;
     background-color: var(--bs-body-bg);
+    scroll-behavior: smooth;
     
 }
 
@@ -427,3 +428,15 @@ html, body {
 /* planning – click sur un événement */
 .week-calendar .event{ cursor: pointer; }
 .week-calendar .event:focus-visible{ outline: 2px solid var(--bs-primary); outline-offset: 2px; }
+
+
+/* Mentions légales */
+.section-title + p {
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.card.shadow-sm {
+  border-radius: 14px;
+}
